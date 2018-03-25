@@ -1,0 +1,66 @@
+<mdl-card mdl-shadow="4" class="card">
+
+
+  <div class="container">
+      <div class="form-group">
+<h4>Faculty</h4>
+        <select [(ngModel)]="name">
+              <option> </option>
+              <option *ngFor="let f of faculty">{{f.username}}</option>
+            </select>
+      </div>
+      <div class="form-group">
+        <h4>Year</h4>   
+        <select  [(ngModel)]="year">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+              </select>
+      </div>
+      <div class="form-group">
+        <h4>Section</h4>        
+        <select  [(ngModel)]="section">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+        </div> 
+        <div class="form-group">
+            <button id="mapButton" mdl-button mdl-button-type="raised" (click)="mapFaculty()" mdl-colored="primary" mdl-ripple>
+              Map Faculty
+            </button>
+          </div>     
+  </div>
+</mdl-card>
+
+ 
+
+<mdl-card mdl-shadow="4" class="card">
+<h3>Faculty Mapping Details</h3>
+   
+<div class="jumbotron">
+        
+  <div class="table-responsive">          
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Faculty Name</th>
+        <th>Year & Section</th>
+       <th><button class="btn btn-danger" (click)="remove()">Edit Mapping</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of faculty ;let index=index">
+        
+        <td>{{f.username}}</td>
+        <td *ngFor="let i of map_object[index] ">{{i.year}} - {{i.section}}&nbsp;&nbsp;<button class="btn btn-danger" (click)="removeFaculty(f.username,i.year,i.section)" *ngIf="edit">Remove</button><br></td>
+        
+      </tr>
+    </tbody>
+  </table>
+  </div>
+ </div>
+</mdl-card>  
+

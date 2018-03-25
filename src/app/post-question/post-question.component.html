@@ -1,0 +1,114 @@
+<br>
+<br>
+<br>
+<div class="row">
+  <div class="col-sm-12">
+    <mdl-card mdl-shadow="4" class="card">
+
+      <div id="questionEditor">
+
+        <mdl-tabs mdl-ripple mdl-tab-active-index="0">
+          <mdl-tab-panel>
+            <mdl-tab-panel-title>
+              <span>Marks</span>
+            </mdl-tab-panel-title>
+            <mdl-tab-panel-content>
+              <app-faculty-menu></app-faculty-menu>
+            </mdl-tab-panel-content>
+          </mdl-tab-panel>
+          <mdl-tab-panel mdl-tab-panel-title="Post Question">
+
+
+
+            <form id="menu">
+              <div class="row">
+                  <h3 style="text-shadow:2px 2px 2px;">Post a Question</h3>
+                <div class="container">
+                    <div>
+                        <h5>Select Year : </h5>
+                        <select name="selectedYear" [(ngModel)]="selectedYear">
+                          <option *ngFor="let i of years">{{i}}</option>
+        
+                        </select>        
+                    </div>
+                    <div>
+                        <h5>Select Section : </h5>
+                        <select name="selectedSection" [(ngModel)]="selectedSection">
+                          <option *ngFor="let i of sections">{{i}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h5>Select week</h5>
+                <select name="selectedYear" [(ngModel)]="week">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                </select>
+                    </  div>
+                </div>
+              </div>
+              <div class="row">
+                <h5>Post your Question Name</h5>
+                <textarea name="questionName" cols="90" rows="2" [(ngModel)]="questionName" placeholder="Problem Statement"></textarea>
+                <h5>Your question must include : 1. Problem 2.Sample Input&Output
+                </h5>
+                <textarea name="problem_stmt" cols="90" rows="10" [(ngModel)]="question" placeholder="Problem"></textarea>
+              </div>
+              <div class="row">
+                <h5>Enter the number of test cases for input :</h5>
+                <input type="text" name="noOfTestCases" [(ngModel)]="n" (change)="changeNoOfTestCases($event.target.value)">
+                <button mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="testCases()">
+                    Submit
+                </button>   
+                <div *ngIf="showTestInputBox" class="cases">
+                  <div>
+                  <h5>Enter Input Test Cases :</h5>
+                  <ul>
+                    <li *ngFor="let i of arr">
+                      <input type="text" name="testCase" [(ngModel)]="input[i]" />{{input[i]}}</li>
+                  </ul>
+                  </div>
+                  <div>
+                  <h5>Enter Output Test Cases :</h5>
+                  <ul>
+                    <li *ngFor="let i of arr">
+                      <input type="text" name="testCase" [(ngModel)]="output[i]" />{{output[i]}}</li>
+                  </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="showTestInputBox">
+                <div class="col-sm-offset-5 col-sm-2"> 
+                  <button class="totalSubmit" mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="submitQuestion()">
+                      Submit Question
+                  </button>                
+                </div>
+              </div>
+            </form>
+          </mdl-tab-panel>
+          <mdl-tab-panel>
+            <mdl-tab-panel-title>
+              <span>Quiz</span>
+            </mdl-tab-panel-title>
+            <mdl-tab-panel-content>
+              <app-quiz></app-quiz>
+            </mdl-tab-panel-content>
+          </mdl-tab-panel>
+        </mdl-tabs>
+      </div>
+    </mdl-card>
+  </div>
+
+</div>

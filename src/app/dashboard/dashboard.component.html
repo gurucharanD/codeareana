@@ -1,0 +1,127 @@
+<div id="total">
+  <div class="row">
+    <form [formGroup]="form">
+      <div class="col-sm-3" id="left">
+
+        <h2>Select Week : </h2>
+        <select name="selectedWeek" formControlName="week" placeholder="week" (change)="onChangeWeek()">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+        </select>
+
+        <div id="button">
+          <input type="submit" value="Code Challenge" name="getQuestions" class="btn btn-warning" (click)="showQuestionForWeek()">
+          <input type="submit" value="Answer Quiz" class="btn btn-warning" (click)="showQuiz()">
+
+        </div>
+
+      </div>
+    </form>
+
+    <div class="col-sm-6" id="right">
+      <div class="list-group">
+        <ul *ngIf="showQuestions">
+          <li style="margin:2%;" *ngFor="let question of displayQuestions" class="list-group-item active">
+            <div *ngIf="!question.isAttempted">
+              <h3>{{question.name}}</h3>
+              <h5>Posted By : {{question.postedBy}}</h5>
+              <input type="submit" class="btn btn-danger" (click)="sendQuestion(question)" value="Solve" style="margin-left:2%;">
+            </div>
+          </li>
+
+
+        </ul>
+        <h3 *ngIf="noQuestions" style="border:2px solid black">No Questions to Show. Please contact your faculty </h3>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="quizDisplay">
+  <h2>Your Quiz Questions for this week</h2>
+  <div *ngFor="let quiz of quizQuestions; let i = index" style="border:1px solid black">
+    <h3>{{i + 1}}.{{quiz.question}}</h3>
+
+    <label class="radio-inline">
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_one" [(ngModel)]="stu_answers[i]">{{quiz.option_one}}
+    </label>
+
+    <label class="radio-inline">
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_two" [(ngModel)]="stu_answers[i]">{{quiz.option_two}}
+    </label>
+
+    <label class="radio-inline">
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_three" [(ngModel)]="stu_answers[i]">{{quiz.option_three}}
+    </label>
+
+    <label class="radio-inline">
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_four" [(ngModel)]="stu_answers[i]">{{quiz.option_four}}
+    </label>
+    <br>
+    <hr>
+    <label>
+      &nbsp;&nbsp;&nbsp;-PostedBy:{{quiz.postedBy}}
+    </label>
+    <br>
+  </div>
+  <div>
+    <br>
+  </div>
+  <div class="col-sm-3" >
+
+    <input type="submit" value="Submit Answers" class="btn btn-danger" (click)="validateAnswers()">
+  </div>
+</div>
+<h3 *ngIf="noQuiz" style="border:2px solid black">No QUIZ Questions to Show. Please contact your faculty </h3>
+<div *ngIf="marksDisplay">
+  <h2>Your Quiz Marks For This week!</h2>
+  <table class="table table-bordered">
+    <tr>
+      <td><h4>Total Questions:</h4></td>
+      <td><h5>{{fac_answers.length}}</h5></td>
+      <td>&nbsp;</td>
+      
+    </tr>
+    <tr>
+      <td><h4>Correctly Answered:</h4></td>
+      <td><h5>{{score}}</h5></td>
+      <td>&nbsp;</td>
+      
+    </tr>
+    <tr>
+      <td><h4>Wrongly Answered:</h4></td>
+      <td><h5>{{fac_answers.length-score}}</h5></td>
+      <td>&nbsp;</td>
+      
+    </tr>
+    <tr>
+      <td><h4>Questions You Went Wrong Are Below</h4></td>
+      <td><h4>YourAnswer:</h4></td>
+      <td><h4>CorrectAnswer:</h4></td>
+    </tr>
+    <tr *ngFor="let i of wrong_answers">
+      <td><h5>{{quizQuestions[i].question}}</h5></td>
+      <td><h5>{{stu_answers[i]}}</h5></td>
+      <td><h5>{{fac_answers[i]}}</h5></td>
+      
+
+    </tr>
+  </table>
+
+</div>

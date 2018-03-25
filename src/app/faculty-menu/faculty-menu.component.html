@@ -1,0 +1,47 @@
+<div id="FacultyMenu">
+  <form id="menu">
+    <h1>Download Marks sheet of students</h1>
+      <h3>Select Year</h3>
+      <select name="year" [(ngModel)]="year">
+        <option *ngFor="let i of years">{{i}}</option>
+      </select>
+    
+    <h3>Select section</h3>
+    <select name="section" [(ngModel)]="section">
+      <option *ngFor="let i of sections">{{i}}</option>
+    </select>
+  </form>
+
+
+<h3>Click here to get marks</h3>
+&nbsp;&nbsp;&nbsp;
+<input type="submit" name="submit" value="GET MARKS" (click)="getMarks()" class="btn btn-primary">
+<br>
+<br>
+<div>
+  <div class="col-xs-4" style="margin:2%;">
+    <input class="form-control" type="text" [(ngModel)]="marks" name="marks" placeholder="Code Challenge Marks">
+  </div>
+  <div class="col-xs-4" style="margin:2%;">
+    <input class="form-control" type="text" [(ngModel)]="quizmarks" name="quizmarks" placeholder="Quiz Marks">
+  </div>
+  <div class="col-xs-4">
+    <input type="submit" name="submit" value="GET REPORT" (click)="getFilteredReports()" class="btn btn-primary">
+  </div>
+</div>
+<br>
+<div *ngIf="viewMarks">
+  <table class="table table-striped">
+    <tr>
+      <td>UserName</td>
+      <td>Coding Marks</td>
+      <td>Quiz Marks</td>
+    </tr>
+    <tr *ngFor="let student of students">
+      <td>{{student.username}}</td>
+      <td>{{student.marks}}</td>
+      <td>{{student.quizmarks}}</td>
+  </table>
+  <input type="submit" (click)="download()" value="download" class="btn btn-warning">
+</div>
+

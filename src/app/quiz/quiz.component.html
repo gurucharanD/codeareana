@@ -1,0 +1,103 @@
+<h1>Post Quiz Questions</h1>
+
+<form id="menu">
+  <div class="row">
+    <div class="container">
+      <div>
+        <h5>Select Year : </h5>
+        <select name="selectedYear" [(ngModel)]="selectedYear">
+          <option *ngFor="let i of years">{{i}}</option>
+
+        </select>
+      </div>
+      <div>
+        <h5>Select Section : </h5>
+        <select name="selectedSection" [(ngModel)]="selectedSection">
+          <option *ngFor="let i of sections">{{i}}</option>
+        </select>
+      </div>
+      <div>
+        <h5>Select week:</h5>
+        <select name="selectedYear" [(ngModel)]="selectedWeek">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+        </select>
+        </ div>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <hr>
+      </div>
+      <div class="col-xs-4">
+        <input class="form-control" type="text" [(ngModel)]="tot" name="marks" placeholder="enter number of input questions">
+      </div>
+      <div class="col-xs-2">
+        <input type="submit" name="submit" value="POST" (click)="getQuestionBoxes()" class="btn btn-primary">
+      </div>
+    </div>
+    <div>
+      <br>
+    </div>
+    <div>
+      <hr>
+    </div>
+    <div>
+      <hr>
+    </div>
+    <div>
+      <hr>
+    </div>
+    <div *ngFor="let i of boxes;let i=index">
+      <div class="form-group">
+        <input class="form-control input-lg" id="inputlg" type="text" placeholder="Question {{i+1}}" [(ngModel)]="questions[i]" name="question1">
+      </div>
+      <div class="col-xs-2">
+        <input class="form-control" id="ex1" type="text" placeholder="Option 1" [(ngModel)]="option_one[i]" name="option1">
+      </div>
+      <div class="col-xs-2">
+        <input class="form-control" id="ex1" type="text" placeholder="Option 2" [(ngModel)]="option_two[i]" name="option2">
+      </div>
+      <div class="col-xs-2">
+        <input class="form-control" id="ex1" type="text" placeholder="Option 3" [(ngModel)]="option_three[i]" name="option3">
+      </div>
+      <div class="col-xs-2">
+        <input class="form-control" id="ex1" type="text" placeholder="Option 4" [(ngModel)]="option_four[i]" name="option4">
+      </div>
+      <div class="col-xs-2">
+        <label>Answer</label>
+        <select [(ngModel)]="answers[i]" name="answer">
+          <option></option>
+          <option>{{option_one[i]}}</option>
+          <option>{{option_two[i]}}</option>
+          <option>{{option_three[i]}}</option>
+          <option>{{option_four[i]}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+      </div>
+      <div>
+        <hr>
+      </div>
+
+
+    </div>
+
+    <div class="col-xs-2">
+      <input type="submit" name="submit" value="POST QUIZ" (click)="sendQuestions()" class="btn btn-primary" *ngIf="postButton">
+    </div>
