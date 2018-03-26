@@ -16,7 +16,7 @@ const directory = 'code/python';
 
 const router = express.Router();
 
-const db = "mongodb://localhost";
+const db = "mongodb://codearena:codearena@ds023613.mlab.com:23613/codearena";
 
 mongoose.Promise = global.Promise;
 
