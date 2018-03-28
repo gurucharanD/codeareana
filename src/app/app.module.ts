@@ -90,6 +90,7 @@ import {
 import {
   QuizComponent
 } from './quiz/quiz.component';
+import { FacRegisterComponent } from './fac-register/fac-register.component';
 
 
 
@@ -107,7 +108,8 @@ import {
     HomeComponent,
     AdminComponent,
     MappingComponent,
-    QuizComponent
+    QuizComponent,
+    FacRegisterComponent
 
   ],
   imports: [

@@ -89,14 +89,14 @@ export class DashboardComponent implements OnInit {
     console.log(data);
     this._loginService.getQuestions(data).subscribe(res => {
       this.questions = res;
-      if (this.questions.length == 0) {
+      if (this.questions.length === 0) {
         this.noQuestions = true;
       } else {
         this.noQuestions = false;
         Cookie.set('week', this.form.get('week').value + ' ');
         this.showQuestions = true;
 
-        if (this.answeredQuestions.length == 0) {
+        if (this.answeredQuestions.length === 0) {
           this.displayQuestions = this.questions;
         } else {
           // console.log(this.questions);
@@ -111,12 +111,10 @@ export class DashboardComponent implements OnInit {
     console.log(aq);
     console.log(this.questions);
 
-
-
     let i, j;
     for (i = 0; i < this.questions.length; i++) {
       for (j = 0; j < aq.length; j++) {
-        if (aq[j].qid != this.questions[i]['_id']) {
+        if (aq[j].qid !== this.questions[i]['_id']) {
           this.displayQuestions.push(this.questions[i]);
         }
       }
@@ -132,6 +130,7 @@ export class DashboardComponent implements OnInit {
       this.noQuestions = false;
     }
     this.showQuestions = false;
+    this.noQuiz = false;
     this.quizDisplay = true;
     const data = {
       week: this.form.get('week').value,
@@ -142,9 +141,11 @@ export class DashboardComponent implements OnInit {
 
     this.quiz.getQuizQuestions(data).subscribe(res => {
       console.log(res);
-      if (res.length == 0) {
+      if (res.length === 0) {
+        this.quizDisplay = false;
         this.noQuiz = true;
       }
+      this.marksDisplay = false;
       this.quizQuestions = res;
       for (const iterator of res) {
         this.fac_answers.push(iterator.answer);
@@ -153,8 +154,6 @@ export class DashboardComponent implements OnInit {
   }
 
   validateAnswers() {
-    console.log('errrr');
-
     for (let i = 0; i < this.stu_answers.length; i++) {
       if (this.stu_answers[i] == this.fac_answers[i]) {
         this.score += 1;

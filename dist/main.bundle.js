@@ -6,15 +6,15 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module"
+		"dashboard.module.0"
 	],
 	"./faculty-login/faculty-login.module": [
 		"../../../../../src/app/faculty-login/faculty-login.module.ts",
-		"faculty-login.module"
+		"faculty-login.module.0"
 	],
 	"./register-user/register.module": [
 		"../../../../../src/app/register-user/register.module.ts",
-		"register.module"
+		"register.module.0"
 	]
 };
 function webpackAsyncContext(req) {
@@ -41,7 +41,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".div{\r\n    \r\n    padding-left: 30%;\r\n    background-color: #f1f1ff;\r\n   }\r\n   \r\n   #loginForm{\r\n       margin-top: 3%;\r\n       box-shadow: 1px 1px 1px 2px;\r\n   }\r\n\r\n   input{\r\n       width:150%;\r\n   }\r\n\r\n   button{\r\n       margin:2%;  \r\n    width: 150%;\r\n    }", ""]);
+exports.push([module.i, ".div{\n    \n    padding-left: 30%;\n    background-color: #f1f1ff;\n   }\n   \n   #loginForm{\n       margin-top: 3%;\n       box-shadow: 1px 1px 1px 2px;\n   }\n\n   input{\n       width:150%;\n   }\n\n   button{\n       margin:2%;  \n    width: 150%;\n    }", ""]);
 
 // exports
 
@@ -102,8 +102,8 @@ var AdminComponent = (function () {
     AdminComponent.prototype.checkLogin = function () {
         // validate the user here
         var _this = this;
-        if (this.username.value == '' || this.password.value == '') {
-            alert("Username/Password cannot be empty");
+        if (this.username.value === '' || this.password.value === '') {
+            alert('Username/Password cannot be empty');
         }
         else {
             var user = {
@@ -111,11 +111,11 @@ var AdminComponent = (function () {
                 password: this.password.value,
             };
             console.log(user);
-            //validation part
+            // validation part
             this.loginService.isValidAdmin(user)
                 .subscribe(function (res) {
-                //console.log(res);
-                if (res.result == 1) {
+                console.log(res);
+                if (res.result === 1) {
                     _this.isLoggedIn = true;
                     _this.auth.setStudentLogin(true);
                     var userDetails = res.userDetails;
@@ -124,7 +124,7 @@ var AdminComponent = (function () {
                 }
                 else {
                     _this.isLoggedIn = false;
-                    alert("Invalid USERNAME/PASSWORD/YEAR!");
+                    alert('Invalid USERNAME/PASSWORD!');
                 }
             });
         }
@@ -166,7 +166,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <nav class=\"nav\">\n\n \n\n  </nav>\n\n\n  <nav class=\"navbar navbar-inverse\">\n      <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span> \n          </button>\n          <a class=\"navbar-brand\" href=\"#\">Code Arena</a>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n          <ul class=\"nav navbar-nav navbar-right\">\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/adminLogin\">Admin Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/login\">Student Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/facultyLogin\">Faculty Login</a></li>\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/registerUser\">Register Student</a></li>\n              <li><a *ngIf=\"isLoggedIn\" >Welcome {{user}}</a></li>\n              <li><a *ngIf=\"isLoggedIn\"  (click)=\"logout()\">Log out</a></li>\n          </ul>\n        </div>\n      </div>\n    </nav>\n\n\n\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
+module.exports = "<div>\n  <nav class=\"navbar navbar-inverse\">\n    <div class=\"container-fluid\">\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n          <span class=\"icon-bar\"></span>\n          <span class=\"icon-bar\"></span>\n          <span class=\"icon-bar\"></span>\n        </button>\n        <a class=\"navbar-brand\" href=\"#\">Code Arena</a>\n      </div>\n      <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/adminLogin\">Admin Login</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/login\">Student Login</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/facultyLogin\">Faculty Login</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/facultyRegister\">Faculty Register</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/registerUser\">Register Student</a>\n          </li>\n          <li>\n            <a *ngIf=\"isLoggedIn\">Welcome {{user}}</a>\n          </li>\n          <li>\n            <a *ngIf=\"isLoggedIn\" (click)=\"logout()\">Log out</a>\n          </li>\n        </ul>\n      </div>\n    </div>\n  </nav>\n\n\n\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
 
 /***/ }),
 
@@ -265,12 +265,14 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__mapping_service__ = __webpack_require__("../../../../../src/app/mapping.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__ = __webpack_require__("../../../../@angular-mdl/core/components/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__ = __webpack_require__("../../../../../src/app/quiz/quiz.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__ = __webpack_require__("../../../../../src/app/fac-register/fac-register.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -317,7 +319,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_20__home_home_component__["a" /* HomeComponent */],
             __WEBPACK_IMPORTED_MODULE_22__admin_admin_component__["a" /* AdminComponent */],
             __WEBPACK_IMPORTED_MODULE_23__mapping_mapping_component__["a" /* MappingComponent */],
-            __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__["a" /* QuizComponent */]
+            __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__["a" /* QuizComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__["a" /* FacRegisterComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__["c" /* MdlModule */],
@@ -346,13 +349,15 @@ AppModule = __decorate([
 "use strict";
 /* unused harmony export router */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routes; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mapping_mapping_component__ = __webpack_require__("../../../../../src/app/mapping/mapping.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__admin_admin_component__ = __webpack_require__("../../../../../src/app/admin/admin.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__editor_editor_component__ = __webpack_require__("../../../../../src/app/editor/editor.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__post_question_post_question_component__ = __webpack_require__("../../../../../src/app/post-question/post-question.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fac_register_fac_register_component__ = __webpack_require__("../../../../../src/app/fac-register/fac-register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mapping_mapping_component__ = __webpack_require__("../../../../../src/app/mapping/mapping.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin_admin_component__ = __webpack_require__("../../../../../src/app/admin/admin.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__editor_editor_component__ = __webpack_require__("../../../../../src/app/editor/editor.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__post_question_post_question_component__ = __webpack_require__("../../../../../src/app/post-question/post-question.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
+
 
 
 
@@ -362,7 +367,7 @@ AppModule = __decorate([
 
 var router = [{
         path: '',
-        component: __WEBPACK_IMPORTED_MODULE_5__login_login_component__["a" /* LoginComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */],
         pathMatch: 'full'
     },
     {
@@ -371,34 +376,38 @@ var router = [{
     },
     {
         path: 'login',
-        component: __WEBPACK_IMPORTED_MODULE_5__login_login_component__["a" /* LoginComponent */]
+        component: __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */]
     },
     {
         path: 'adminLogin',
-        component: __WEBPACK_IMPORTED_MODULE_1__admin_admin_component__["a" /* AdminComponent */]
+        component: __WEBPACK_IMPORTED_MODULE_2__admin_admin_component__["a" /* AdminComponent */]
     },
     {
         path: 'adminDashboard',
-        canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]],
-        component: __WEBPACK_IMPORTED_MODULE_0__mapping_mapping_component__["a" /* MappingComponent */]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_guard__["a" /* AuthGuard */]],
+        component: __WEBPACK_IMPORTED_MODULE_1__mapping_mapping_component__["a" /* MappingComponent */]
     },
     {
         path: 'facultyLogin',
         loadChildren: './faculty-login/faculty-login.module#FacultyLoginModule'
     },
     {
+        path: 'facultyRegister',
+        component: __WEBPACK_IMPORTED_MODULE_0__fac_register_fac_register_component__["a" /* FacRegisterComponent */]
+    },
+    {
         path: 'postQuestion',
-        canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]],
-        component: __WEBPACK_IMPORTED_MODULE_4__post_question_post_question_component__["a" /* PostQuestionComponent */]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_guard__["a" /* AuthGuard */]],
+        component: __WEBPACK_IMPORTED_MODULE_5__post_question_post_question_component__["a" /* PostQuestionComponent */]
     },
     {
         path: 'editor',
-        canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]],
-        component: __WEBPACK_IMPORTED_MODULE_3__editor_editor_component__["a" /* EditorComponent */]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_guard__["a" /* AuthGuard */]],
+        component: __WEBPACK_IMPORTED_MODULE_4__editor_editor_component__["a" /* EditorComponent */]
     },
     {
         path: 'dashboard',
-        canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]],
+        canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_guard__["a" /* AuthGuard */]],
         loadChildren: './dashboard/dashboard.module#DashboardModule'
     },
     {
@@ -406,7 +415,7 @@ var router = [{
         redirectTo: 'login'
     }
 ];
-var routes = __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forRoot(router);
+var routes = __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forRoot(router);
 //# sourceMappingURL=app.router.js.map
 
 /***/ }),
@@ -875,6 +884,104 @@ EditorComponent = __decorate([
 
 var _a, _b, _c, _d;
 //# sourceMappingURL=editor.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/fac-register/fac-register.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".div{\r\n    \r\n    padding-left: 30%;\r\n    background-color: #f1f1ff;\r\n   }\r\n   \r\n   #loginForm{\r\n       margin-top: 3%;\r\n       box-shadow: 1px 1px 1px 2px;\r\n   }\r\n\r\n\r\n   button{\r\n       margin:2%;  \r\n    width: 150%;\r\n    }\r\n\r\n    input{\r\n        width:150%;\r\n    }", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/fac-register/fac-register.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"col-sm-3\" style=\"margin-left:2%;margin-right:2%;\">\n    <img src=\"https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png\" width=\"100%\" height=\"70%\" alt=\"code\">\n  </div>\n  <div id=\"loginForm\" class=\"col-sm-8\">\n\n\n    <h1 style=\"margin-left:4%;text-shadow:2px 2px 2px;\">Register Faculty</h1>\n    <form class=\"form-horizontal\" [formGroup]=\"form\">\n      <div class=\"form-group\">\n        <br>\n        <br>\n        <label class=\"control-label col-sm-5\" for=\"uname\">Username</label>\n        <div class=\"col-sm-2\">\n          <input type=\"text\" class=\"form-control\" name=\"uname\" formControlName=\"username\" placeholder=\"Enter Username\">\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label class=\"control-label col-sm-5\" for=\"pwd\">Password</label>\n        <div class=\"col-sm-2\">\n          <input type=\"password\" class=\"form-control\" name=\"password\" formControlName=\"password\" placeholder=\"Enter password\">\n        </div>\n      </div>\n\n        <div class=\"form-group\">\n          <div class=\"col-sm-offset-5 col-sm-2\">\n            <button type=\"submit\" class=\"btn btn-primary\" (click)=\"registerFaculty()\">Register</button>\n            <button type=\"reset\" class=\"btn btn-danger\">Reset</button>\n          </div>\n        </div>\n    </form>\n    <br>\n    <br>\n\n   \n    "
+
+/***/ }),
+
+/***/ "../../../../../src/app/fac-register/fac-register.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FacRegisterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_service__ = __webpack_require__("../../../../../src/app/register.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var FacRegisterComponent = (function () {
+    function FacRegisterComponent(_registerService, router, fb) {
+        this._registerService = _registerService;
+        this.router = router;
+        this.fb = fb;
+        this.username = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required);
+        this.password = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required);
+        this.year = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required);
+        this.section = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required);
+    }
+    FacRegisterComponent.prototype.ngOnInit = function () {
+        this.form = this.fb.group({
+            'username': this.username,
+            'password': this.password,
+            'year': this.year,
+            'section': this.section
+        });
+    };
+    FacRegisterComponent.prototype.registerFaculty = function () {
+        var _this = this;
+        if (this.username.value === '' || this.password.value === '') {
+            alert('Username/Password cannot be empty');
+        }
+        else {
+            var user = {
+                username: this.username.value,
+                password: this.password.value,
+            };
+            this._registerService.registerFaculty(user)
+                .subscribe(function (res) {
+                alert(res.msg);
+                _this.router.navigate(['facultyLogin']);
+            });
+        }
+    };
+    return FacRegisterComponent;
+}());
+FacRegisterComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-fac-register',
+        template: __webpack_require__("../../../../../src/app/fac-register/fac-register.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/fac-register/fac-register.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__register_service__["a" /* RegisterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__register_service__["a" /* RegisterService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object])
+], FacRegisterComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=fac-register.component.js.map
 
 /***/ }),
 
@@ -1405,7 +1512,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".card{\r\n    width: 80%;\r\n    margin-left: 10%;\r\n    margin-right: 10%;\r\n    margin-top: 5%;    \r\n    margin-bottom: 3%;    \r\n    padding-left: 1%;\r\n    background-color: #f1f1f1;  \r\n}\r\n\r\nselect{\r\n    width:80%;\r\n}\r\n\r\n.container {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n  }\r\n  .container > div {\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1; /*grow*/\r\n  }\r\n  #mapButton{\r\n      margin-top:20%;\r\n      margin-left:5%;\r\n  }", ""]);
+exports.push([module.i, ".card{\n    width: 80%;\n    margin-left: 10%;\n    margin-right: 10%;\n    margin-top: 5%;    \n    margin-bottom: 3%;    \n    padding-left: 1%;\n    background-color: #f1f1f1;  \n}\n\nselect{\n    width:80%;\n}\n\n.container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n  }\n  .container > div {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1; /*grow*/\n  }\n  #mapButton{\n      margin-top:20%;\n      margin-left:5%;\n  }", ""]);
 
 // exports
 
@@ -1452,6 +1559,7 @@ var MappingComponent = (function () {
         var _this = this;
         this.mapping.getFaculty().subscribe(function (res) {
             _this.faculty = res;
+            console.log(_this.faculty);
             for (var i = 0; i < _this.faculty.length; i++) {
                 _this.map_object[i] = res[i].map;
             }
@@ -1469,7 +1577,7 @@ var MappingComponent = (function () {
         };
         console.log(newMap);
         this.mapping.mapFaculty(newMap).subscribe(function (res) {
-            console.log("return data", res);
+            // console.log("return data", res);
             _this.ngOnInit();
         });
     };
@@ -1739,7 +1847,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#sameline{    \r\n    display: inline;\r\n}\r\n#questionEditor{\r\n    margin:5%;\r\n    /* background-color: #f1f1f1; */\r\n}\r\n\r\nselect{\r\nwidth:30%;\r\n}\r\n\r\n.container {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n  }\r\n  .container > div {\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1; /*grow*/\r\n  }\r\n\r\n  .cases {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n  }\r\n  .cases > div {\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1;\r\n            flex: 1; /*grow*/\r\n  }\r\n\r\n.card{\r\n    width: 80%;\r\n    margin-left: 10%;\r\n    margin-right: 10%;\r\n    margin-top: 2%;    \r\n    margin-bottom: 3%;    \r\n    padding-left: 1%;\r\n    background-color: #f1f1f1;  \r\n}\r\n\r\n.totalSubmit{\r\n    margin-top:5%;\r\n}\r\n\r\n#sameline{    \r\n  display: inline;\r\n}\r\n\r\n\r\nhr {\r\n  clear: both;\r\n  visibility: hidden;\r\n}", ""]);
+exports.push([module.i, "#sameline{    \n    display: inline;\n}\n#questionEditor{\n    margin:5%;\n    /* background-color: #f1f1f1; */\n}\n\nselect{\nwidth:30%;\n}\n\n.container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n  }\n  .container > div {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1; /*grow*/\n  }\n\n  .cases {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n  }\n  .cases > div {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1; /*grow*/\n  }\n\n.card{\n    width: 80%;\n    margin-left: 10%;\n    margin-right: 10%;\n    margin-top: 2%;    \n    margin-bottom: 3%;    \n    padding-left: 1%;\n    background-color: #f1f1f1;  \n}\n\n.totalSubmit{\n    margin-top:5%;\n}\n\n#sameline{    \n  display: inline;\n}\n\n\nhr {\n  clear: both;\n  visibility: hidden;\n}", ""]);
 
 // exports
 
@@ -1893,6 +2001,12 @@ var RegisterService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         return this.http.post('api/registerUser', JSON.stringify(user), { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    RegisterService.prototype.registerFaculty = function (user) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('api/facRegister', JSON.stringify(user), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return RegisterService;

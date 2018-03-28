@@ -53,25 +53,25 @@
 
 
 
-<div *ngIf="quizDisplay">
+<div *ngIf="quizDisplay" class="quizQuestions">
   <h2>Your Quiz Questions for this week</h2>
-  <div *ngFor="let quiz of quizQuestions; let i = index" style="border:1px solid black">
+  <div class="question" *ngFor="let quiz of quizQuestions; let i = index" >
     <h3>{{i + 1}}.{{quiz.question}}</h3>
 
     <label class="radio-inline">
-      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_one" [(ngModel)]="stu_answers[i]">{{quiz.option_one}}
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_one" *ngIf="quiz.option_one" [(ngModel)]="stu_answers[i]">{{quiz.option_one}}
     </label>
 
     <label class="radio-inline">
-      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_two" [(ngModel)]="stu_answers[i]">{{quiz.option_two}}
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_two" *ngIf="quiz.option_two" [(ngModel)]="stu_answers[i]">{{quiz.option_two}}
     </label>
 
     <label class="radio-inline">
-      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_three" [(ngModel)]="stu_answers[i]">{{quiz.option_three}}
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_three" *ngIf="quiz.option_three" [(ngModel)]="stu_answers[i]">{{quiz.option_three}}
     </label>
 
     <label class="radio-inline">
-      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" [value]="quiz.option_four" [(ngModel)]="stu_answers[i]">{{quiz.option_four}}
+      <input type="radio" id="{{quiz._id}}" name="{{quiz._id}}" *ngIf="quiz.option_four" [value]="quiz.option_four" [(ngModel)]="stu_answers[i]">{{quiz.option_four}}
     </label>
     <br>
     <hr>
@@ -84,12 +84,11 @@
     <br>
   </div>
   <div class="col-sm-3" >
-
     <input type="submit" value="Submit Answers" class="btn btn-danger" (click)="validateAnswers()">
   </div>
 </div>
 <h3 *ngIf="noQuiz" style="border:2px solid black">No QUIZ Questions to Show. Please contact your faculty </h3>
-<div *ngIf="marksDisplay">
+<div *ngIf="marksDisplay" class="marksDisplay">
   <h2>Your Quiz Marks For This week!</h2>
   <table class="table table-bordered">
     <tr>

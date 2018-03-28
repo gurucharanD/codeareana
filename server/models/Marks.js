@@ -11,7 +11,7 @@ const marksSchema = new Schema({
     marksScored: Number,
     isAttempted: Boolean
   }],
-  quizmarks:Number
+  quizmarks:Number,
 });
 
 module.exports = mongoose.model('marks', marksSchema, 'marks');

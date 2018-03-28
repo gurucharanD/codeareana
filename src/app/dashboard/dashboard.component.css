@@ -16,3 +16,17 @@ h2{
 #button{
     margin-top: 5%;
 }
+
+
+.quizQuestions{
+    margin:2%;
+}
+
+.question{
+    padding:2%;
+    border:1px solid black;
+}
+
+.marksDisplay{
+    margin:2%;
+}

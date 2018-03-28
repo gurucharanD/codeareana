@@ -255,7 +255,7 @@ router.post('/facRegister', function (req, res) {
           throw err;
         else
           res.json({
-            'msg': 'Login successful ',
+            'msg': 'Registration successful ',
             'value': insertedFaculty,
             'result': 1
           });
@@ -641,13 +641,13 @@ router.post('/adminLogin', function (req, res) {
       };
     }
     if (!user) {
-      // console.log("invalid user");
+      console.log("invalid user");
       res.json({
         msg: "Invalid User",
         result: 0
       });
     } else {
-      //   console.log("Valid User");
+        console.log("Valid User");
       res.json({
         msg: 'Login successful',
         result: 1,
