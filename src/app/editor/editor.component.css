@@ -27,3 +27,7 @@ textarea{
     float: left;
     height: 100%;
 }
+
+select{
+    width:100%;
+}

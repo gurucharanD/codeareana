@@ -13,7 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
-import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 
 
 export const router: Routes = [{

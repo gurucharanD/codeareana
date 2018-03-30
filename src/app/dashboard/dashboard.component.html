@@ -1,8 +1,8 @@
 <div id="total">
   <div class="row">
-    <form [formGroup]="form">
+   
       <div class="col-sm-3" id="left">
-
+          <form [formGroup]="form">
         <h2>Select Week : </h2>
         <select name="selectedWeek" formControlName="week" placeholder="week" (change)="onChangeWeek()">
           <option value="1">1</option>
@@ -27,9 +27,39 @@
           <input type="submit" value="Answer Quiz" class="btn btn-warning" (click)="showQuiz()">
 
         </div>
-
+      </form>
       </div>
-    </form>
+
+    <div style="margin-left:5%;" class="col-sm-6" *ngIf="displayStudentInfo&&!noQuestions" id="displayStudentInfo">
+        <mdl-card class="demo-card-event" mdl-shadow="2">
+          <mdl-card-title mdl-card-expand>
+            <h4>Student Details</h4>
+          </mdl-card-title>
+          <mdl-card-actions mdl-card-border>
+            <mdl-layout-spacer></mdl-layout-spacer>
+            <img src="../../assets/user.jpg" alt="User" width="50%" height="10%;">
+            <br>
+            <table class="table table-striped">
+              <tr>
+                <th>Student Name: </th>
+                <td>{{studentDetails.name}}</td>
+              </tr>
+              <tr>
+                <th>Year</th>
+                <td>{{studentDetails.year}}</td>
+              </tr>
+              <tr>
+                <th>Section</th>
+                <td>{{studentDetails.section}}</td>              
+              </tr>
+              <tr>
+                <th>Attempted Weeks</th>
+                <td>{{quizAnsweredWeeks}}</td>              
+              </tr>
+            </table>
+          </mdl-card-actions>
+        </mdl-card>
+      </div>
 
     <div class="col-sm-6" id="right">
       <div class="list-group">
@@ -46,7 +76,6 @@
         </ul>
         <h3 *ngIf="noQuestions" style="border:2px solid black">No Questions to Show. Please contact your faculty </h3>
       </div>
-
     </div>
   </div>
 </div>
@@ -55,7 +84,7 @@
 
 <div *ngIf="quizDisplay" class="quizQuestions">
   <h2>Your Quiz Questions for this week</h2>
-  <div class="question" *ngFor="let quiz of quizQuestions; let i = index" >
+  <div class="question" *ngFor="let quiz of quizQuestions; let i = index">
     <h3>{{i + 1}}.{{quiz.question}}</h3>
 
     <label class="radio-inline">
@@ -83,7 +112,7 @@
   <div>
     <br>
   </div>
-  <div class="col-sm-3" >
+  <div class="col-sm-3">
     <input type="submit" value="Submit Answers" class="btn btn-danger" (click)="validateAnswers()">
   </div>
 </div>
@@ -92,33 +121,57 @@
   <h2>Your Quiz Marks For This week!</h2>
   <table class="table table-bordered">
     <tr>
-      <td><h4>Total Questions:</h4></td>
-      <td><h5>{{fac_answers.length}}</h5></td>
+      <td>
+        <h4>Total Questions:</h4>
+      </td>
+      <td>
+        <h5>{{fac_answers.length}}</h5>
+      </td>
       <td>&nbsp;</td>
-      
+
     </tr>
     <tr>
-      <td><h4>Correctly Answered:</h4></td>
-      <td><h5>{{score}}</h5></td>
+      <td>
+        <h4>Correctly Answered:</h4>
+      </td>
+      <td>
+        <h5>{{score}}</h5>
+      </td>
       <td>&nbsp;</td>
-      
+
     </tr>
     <tr>
-      <td><h4>Wrongly Answered:</h4></td>
-      <td><h5>{{fac_answers.length-score}}</h5></td>
+      <td>
+        <h4>Wrongly Answered:</h4>
+      </td>
+      <td>
+        <h5>{{fac_answers.length-score}}</h5>
+      </td>
       <td>&nbsp;</td>
-      
+
     </tr>
     <tr>
-      <td><h4>Questions You Went Wrong Are Below</h4></td>
-      <td><h4>YourAnswer:</h4></td>
-      <td><h4>CorrectAnswer:</h4></td>
+      <td>
+        <h4>Questions You Went Wrong Are Below</h4>
+      </td>
+      <td>
+        <h4>YourAnswer:</h4>
+      </td>
+      <td>
+        <h4>CorrectAnswer:</h4>
+      </td>
     </tr>
     <tr *ngFor="let i of wrong_answers">
-      <td><h5>{{quizQuestions[i].question}}</h5></td>
-      <td><h5>{{stu_answers[i]}}</h5></td>
-      <td><h5>{{fac_answers[i]}}</h5></td>
-      
+      <td>
+        <h5>{{quizQuestions[i].question}}</h5>
+      </td>
+      <td>
+        <h5>{{stu_answers[i]}}</h5>
+      </td>
+      <td>
+        <h5>{{fac_answers[i]}}</h5>
+      </td>
+
 
     </tr>
   </table>

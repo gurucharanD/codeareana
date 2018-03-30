@@ -35,6 +35,9 @@ export class DashboardComponent implements OnInit {
   quizDisplay = false;
   marksDisplay = false;
 
+  studentDetails = {};
+  displayStudentInfo = true;
+
 
   answeredQuestions;
   displayQuestions: Question[] = [];
@@ -69,6 +72,10 @@ export class DashboardComponent implements OnInit {
       this.quizAnsweredWeeks = res;
     });
 
+    this.studentDetails['name'] = this.authService.username;
+    this.studentDetails['year'] = this.authService.studentYear;
+    this.studentDetails['section'] = this.authService.studentSection;
+
   }
 
   sendQuestion(question) {
@@ -78,6 +85,7 @@ export class DashboardComponent implements OnInit {
   }
 
   showQuestionForWeek() {
+    this.displayStudentInfo = false;
     this.marksDisplay = false;
     this.noQuiz = false;
     this.quizDisplay = false;
@@ -136,13 +144,15 @@ export class DashboardComponent implements OnInit {
       }
 
     }
-
-
+    if (this.displayQuestions.length === 0) {
+      alert('You have already answered all the questions');
+    }
     // console.log(this.displayQuestions);
   }
 
   showQuiz() {
-        if (this.noQuestions) {
+    this.displayStudentInfo = false;
+    if (this.noQuestions) {
       this.noQuestions = false;
     }
     this.showQuestions = false;
@@ -180,7 +190,7 @@ export class DashboardComponent implements OnInit {
   public isWeekAnswered(week) {
     for (let i = 0; i < this.quizAnsweredWeeks.length; i++) {
       if (this.quizAnsweredWeeks[i] === week) {
-          return true;
+        return true;
       }
     }
     return false;

@@ -1,3 +1,4 @@
+import { MdlModule } from '@angular-mdl/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
   imports: [
+    MdlModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

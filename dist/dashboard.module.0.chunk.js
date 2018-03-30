@@ -60,7 +60,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"total\">\n  <div class=\"row\">\n    <form [formGroup]=\"form\">\n      <div class=\"col-sm-3\" id=\"left\">\n\n        <h2>Select Week : </h2>\n        <select name=\"selectedWeek\" formControlName=\"week\" placeholder=\"week\" (change)=\"onChangeWeek()\">\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n        </select>\n\n        <div id=\"button\">\n          <input type=\"submit\" value=\"Code Challenge\" name=\"getQuestions\" class=\"btn btn-warning\" (click)=\"showQuestionForWeek()\">\n          <input type=\"submit\" value=\"Answer Quiz\" class=\"btn btn-warning\" (click)=\"showQuiz()\">\n\n        </div>\n\n      </div>\n    </form>\n\n    <div class=\"col-sm-6\" id=\"right\">\n      <div class=\"list-group\">\n        <ul *ngIf=\"showQuestions\">\n          <li style=\"margin:2%;\" *ngFor=\"let question of displayQuestions\" class=\"list-group-item active\">\n            <div *ngIf=\"!question.isAttempted\">\n              <h3>{{question.name}}</h3>\n              <h5>Posted By : {{question.postedBy}}</h5>\n              <input type=\"submit\" class=\"btn btn-danger\" (click)=\"sendQuestion(question)\" value=\"Solve\" style=\"margin-left:2%;\">\n            </div>\n          </li>\n\n\n        </ul>\n        <h3 *ngIf=\"noQuestions\" style=\"border:2px solid black\">No Questions to Show. Please contact your faculty </h3>\n      </div>\n\n    </div>\n  </div>\n</div>\n\n\n\n<div *ngIf=\"quizDisplay\" class=\"quizQuestions\">\n  <h2>Your Quiz Questions for this week</h2>\n  <div class=\"question\" *ngFor=\"let quiz of quizQuestions; let i = index\" >\n    <h3>{{i + 1}}.{{quiz.question}}</h3>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" [value]=\"quiz.option_one\" *ngIf=\"quiz.option_one\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_one}}\n    </label>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" [value]=\"quiz.option_two\" *ngIf=\"quiz.option_two\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_two}}\n    </label>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" [value]=\"quiz.option_three\" *ngIf=\"quiz.option_three\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_three}}\n    </label>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" *ngIf=\"quiz.option_four\" [value]=\"quiz.option_four\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_four}}\n    </label>\n    <br>\n    <hr>\n    <label>\n      &nbsp;&nbsp;&nbsp;-PostedBy:{{quiz.postedBy}}\n    </label>\n    <br>\n  </div>\n  <div>\n    <br>\n  </div>\n  <div class=\"col-sm-3\" >\n    <input type=\"submit\" value=\"Submit Answers\" class=\"btn btn-danger\" (click)=\"validateAnswers()\">\n  </div>\n</div>\n<h3 *ngIf=\"noQuiz\" style=\"border:2px solid black\">No QUIZ Questions to Show. Please contact your faculty </h3>\n<div *ngIf=\"marksDisplay\" class=\"marksDisplay\">\n  <h2>Your Quiz Marks For This week!</h2>\n  <table class=\"table table-bordered\">\n    <tr>\n      <td><h4>Total Questions:</h4></td>\n      <td><h5>{{fac_answers.length}}</h5></td>\n      <td>&nbsp;</td>\n      \n    </tr>\n    <tr>\n      <td><h4>Correctly Answered:</h4></td>\n      <td><h5>{{score}}</h5></td>\n      <td>&nbsp;</td>\n      \n    </tr>\n    <tr>\n      <td><h4>Wrongly Answered:</h4></td>\n      <td><h5>{{fac_answers.length-score}}</h5></td>\n      <td>&nbsp;</td>\n      \n    </tr>\n    <tr>\n      <td><h4>Questions You Went Wrong Are Below</h4></td>\n      <td><h4>YourAnswer:</h4></td>\n      <td><h4>CorrectAnswer:</h4></td>\n    </tr>\n    <tr *ngFor=\"let i of wrong_answers\">\n      <td><h5>{{quizQuestions[i].question}}</h5></td>\n      <td><h5>{{stu_answers[i]}}</h5></td>\n      <td><h5>{{fac_answers[i]}}</h5></td>\n      \n\n    </tr>\n  </table>\n\n</div>"
+module.exports = "<div id=\"total\">\n  <div class=\"row\">\n   \n      <div class=\"col-sm-3\" id=\"left\">\n          <form [formGroup]=\"form\">\n        <h2>Select Week : </h2>\n        <select name=\"selectedWeek\" formControlName=\"week\" placeholder=\"week\" (change)=\"onChangeWeek()\">\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n        </select>\n\n        <div id=\"button\">\n          <input type=\"submit\" value=\"Code Challenge\" name=\"getQuestions\" class=\"btn btn-warning\" (click)=\"showQuestionForWeek()\">\n          <input type=\"submit\" value=\"Answer Quiz\" class=\"btn btn-warning\" (click)=\"showQuiz()\">\n\n        </div>\n      </form>\n      </div>\n\n    <div style=\"margin-left:5%;\" class=\"col-sm-6\" *ngIf=\"displayStudentInfo&&!noQuestions\" id=\"displayStudentInfo\">\n        <mdl-card class=\"demo-card-event\" mdl-shadow=\"2\">\n          <mdl-card-title mdl-card-expand>\n            <h4>Student Details</h4>\n          </mdl-card-title>\n          <mdl-card-actions mdl-card-border>\n            <mdl-layout-spacer></mdl-layout-spacer>\n            <img src=\"../../assets/user.jpg\" alt=\"User\" width=\"50%\" height=\"10%;\">\n            <br>\n            <table class=\"table table-striped\">\n              <tr>\n                <th>Student Name: </th>\n                <td>{{studentDetails.name}}</td>\n              </tr>\n              <tr>\n                <th>Year</th>\n                <td>{{studentDetails.year}}</td>\n              </tr>\n              <tr>\n                <th>Section</th>\n                <td>{{studentDetails.section}}</td>              \n              </tr>\n              <tr>\n                <th>Attempted Weeks</th>\n                <td>{{quizAnsweredWeeks}}</td>              \n              </tr>\n            </table>\n          </mdl-card-actions>\n        </mdl-card>\n      </div>\n\n    <div class=\"col-sm-6\" id=\"right\">\n      <div class=\"list-group\">\n        <ul *ngIf=\"showQuestions\">\n          <li style=\"margin:2%;\" *ngFor=\"let question of displayQuestions\" class=\"list-group-item active\">\n            <div *ngIf=\"!question.isAttempted\">\n              <h3>{{question.name}}</h3>\n              <h5>Posted By : {{question.postedBy}}</h5>\n              <input type=\"submit\" class=\"btn btn-danger\" (click)=\"sendQuestion(question)\" value=\"Solve\" style=\"margin-left:2%;\">\n            </div>\n          </li>\n\n\n        </ul>\n        <h3 *ngIf=\"noQuestions\" style=\"border:2px solid black\">No Questions to Show. Please contact your faculty </h3>\n      </div>\n    </div>\n  </div>\n</div>\n\n\n\n<div *ngIf=\"quizDisplay\" class=\"quizQuestions\">\n  <h2>Your Quiz Questions for this week</h2>\n  <div class=\"question\" *ngFor=\"let quiz of quizQuestions; let i = index\">\n    <h3>{{i + 1}}.{{quiz.question}}</h3>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" [value]=\"quiz.option_one\" *ngIf=\"quiz.option_one\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_one}}\n    </label>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" [value]=\"quiz.option_two\" *ngIf=\"quiz.option_two\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_two}}\n    </label>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" [value]=\"quiz.option_three\" *ngIf=\"quiz.option_three\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_three}}\n    </label>\n\n    <label class=\"radio-inline\">\n      <input type=\"radio\" id=\"{{quiz._id}}\" name=\"{{quiz._id}}\" *ngIf=\"quiz.option_four\" [value]=\"quiz.option_four\" [(ngModel)]=\"stu_answers[i]\">{{quiz.option_four}}\n    </label>\n    <br>\n    <hr>\n    <label>\n      &nbsp;&nbsp;&nbsp;-PostedBy:{{quiz.postedBy}}\n    </label>\n    <br>\n  </div>\n  <div>\n    <br>\n  </div>\n  <div class=\"col-sm-3\">\n    <input type=\"submit\" value=\"Submit Answers\" class=\"btn btn-danger\" (click)=\"validateAnswers()\">\n  </div>\n</div>\n<h3 *ngIf=\"noQuiz\" style=\"border:2px solid black\">No QUIZ Questions to Show. Please contact your faculty </h3>\n<div *ngIf=\"marksDisplay\" class=\"marksDisplay\">\n  <h2>Your Quiz Marks For This week!</h2>\n  <table class=\"table table-bordered\">\n    <tr>\n      <td>\n        <h4>Total Questions:</h4>\n      </td>\n      <td>\n        <h5>{{fac_answers.length}}</h5>\n      </td>\n      <td>&nbsp;</td>\n\n    </tr>\n    <tr>\n      <td>\n        <h4>Correctly Answered:</h4>\n      </td>\n      <td>\n        <h5>{{score}}</h5>\n      </td>\n      <td>&nbsp;</td>\n\n    </tr>\n    <tr>\n      <td>\n        <h4>Wrongly Answered:</h4>\n      </td>\n      <td>\n        <h5>{{fac_answers.length-score}}</h5>\n      </td>\n      <td>&nbsp;</td>\n\n    </tr>\n    <tr>\n      <td>\n        <h4>Questions You Went Wrong Are Below</h4>\n      </td>\n      <td>\n        <h4>YourAnswer:</h4>\n      </td>\n      <td>\n        <h4>CorrectAnswer:</h4>\n      </td>\n    </tr>\n    <tr *ngFor=\"let i of wrong_answers\">\n      <td>\n        <h5>{{quizQuestions[i].question}}</h5>\n      </td>\n      <td>\n        <h5>{{stu_answers[i]}}</h5>\n      </td>\n      <td>\n        <h5>{{fac_answers[i]}}</h5>\n      </td>\n\n\n    </tr>\n  </table>\n\n</div>\n"
 
 /***/ }),
 
@@ -114,6 +114,8 @@ var DashboardComponent = (function () {
         this.noQuiz = false;
         this.quizDisplay = false;
         this.marksDisplay = false;
+        this.studentDetails = {};
+        this.displayStudentInfo = true;
         this.displayQuestions = [];
         this.k = 0;
         this.quizAnsweredWeeks = [];
@@ -131,6 +133,9 @@ var DashboardComponent = (function () {
         this.quizService.getAnsweredQuizWeeks(query).subscribe(function (res) {
             _this.quizAnsweredWeeks = res;
         });
+        this.studentDetails['name'] = this.authService.username;
+        this.studentDetails['year'] = this.authService.studentYear;
+        this.studentDetails['section'] = this.authService.studentSection;
     };
     DashboardComponent.prototype.sendQuestion = function (question) {
         this.queService.selectedQuestion(question);
@@ -139,6 +144,7 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.showQuestionForWeek = function () {
         var _this = this;
+        this.displayStudentInfo = false;
         this.marksDisplay = false;
         this.noQuiz = false;
         this.quizDisplay = false;
@@ -195,10 +201,14 @@ var DashboardComponent = (function () {
                 }
             }
         }
+        if (this.displayQuestions.length === 0) {
+            alert('You have already answered all the questions');
+        }
         // console.log(this.displayQuestions);
     };
     DashboardComponent.prototype.showQuiz = function () {
         var _this = this;
+        this.displayStudentInfo = false;
         if (this.noQuestions) {
             this.noQuestions = false;
         }
@@ -294,11 +304,12 @@ var _a, _b, _c, _d, _e, _f, _g;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardModule", function() { return DashboardModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_mdl_core__ = __webpack_require__("../../../../@angular-mdl/core/components/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -310,21 +321,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var DashboardModule = (function () {
     function DashboardModule() {
     }
     return DashboardModule;
 }());
 DashboardModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
         imports: [
-            __WEBPACK_IMPORTED_MODULE_2__angular_common__["CommonModule"],
-            __WEBPACK_IMPORTED_MODULE_0__angular_forms__["d" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_forms__["f" /* ReactiveFormsModule */],
-            __WEBPACK_IMPORTED_MODULE_3__dashboard_routing_module__["a" /* DashboardRoutingModule */]
+            __WEBPACK_IMPORTED_MODULE_0__angular_mdl_core__["a" /* MdlModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common__["CommonModule"],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* ReactiveFormsModule */],
+            __WEBPACK_IMPORTED_MODULE_4__dashboard_routing_module__["a" /* DashboardRoutingModule */]
         ],
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_4__dashboard_component__["a" /* DashboardComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__dashboard_component__["a" /* DashboardComponent */]
         ]
     })
 ], DashboardModule);
