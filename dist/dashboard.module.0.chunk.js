@@ -204,9 +204,10 @@ var DashboardComponent = (function () {
         }
         this.showQuestions = false;
         this.noQuiz = false;
-        this.quizDisplay = true;
         this.userSelectedWeek = this.form.get('week').value;
-        if (!this.isWeekAnswered(this.userSelectedWeek)) {
+        this.quizDisplay = false;
+        var result = this.isWeekAnswered(this.userSelectedWeek);
+        if (!result) {
             var data = {
                 week: this.form.get('week').value,
                 year: this.authService.getUserYear(),
@@ -225,6 +226,7 @@ var DashboardComponent = (function () {
                     var iterator = res_1[_i];
                     _this.fac_answers.push(iterator.answer);
                 }
+                _this.quizDisplay = true;
             });
         }
         else {
@@ -232,12 +234,11 @@ var DashboardComponent = (function () {
         }
     };
     DashboardComponent.prototype.isWeekAnswered = function (week) {
-        this.quizAnsweredWeeks.forEach(function (element) {
-            console.log(element.trim() === week.trim());
-            if (element.trim() === week.trim()) {
+        for (var i = 0; i < this.quizAnsweredWeeks.length; i++) {
+            if (this.quizAnsweredWeeks[i] === week) {
                 return true;
             }
-        });
+        }
         return false;
     };
     DashboardComponent.prototype.validateAnswers = function () {

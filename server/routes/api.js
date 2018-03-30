@@ -517,7 +517,7 @@ router.post('/filterMarks', function (req, res) {
 
 
 router.post('/getStudentMarks', function (req, res) {
-  var username = req.body.userName;
+  var username = req.body.username;
   Marks.findOne({
       username
     })

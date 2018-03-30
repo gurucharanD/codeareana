@@ -169,7 +169,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <nav class=\"navbar navbar-inverse\">\n      <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span> \n          </button>\n          <a class=\"navbar-brand\" href=\"#\">Code Arena</a>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n          <ul class=\"nav navbar-nav navbar-right\">\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/adminLogin\">Admin Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/login\">Student Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/facultyLogin\">Faculty Login</a></li>\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/registerUser\">Register Student</a></li>\n              <li><a *ngIf=\"isLoggedIn\" >Welcome {{user}}</a></li>\n              <li><a *ngIf=\"isLoggedIn\"  (click)=\"logout()\">Log out</a></li>\n          </ul>\n        </div>\n      </div>\n    </nav>\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
+module.exports = "<div>\n  <nav class=\"navbar navbar-inverse\">\n      <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span> \n          </button>\n          <a class=\"navbar-brand\" href=\"#\">Code Arena</a>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n          <ul class=\"nav navbar-nav navbar-right\">\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/adminLogin\">Admin Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/login\">Student Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/facultyLogin\">Faculty Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/registerUser\">Register Student</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/facultyRegister\">Register Faculty</a></li>           \n            <li><a *ngIf=\"isLoggedIn\" >Welcome {{user}}</a></li>\n              <li><a *ngIf=\"isLoggedIn\"  (click)=\"logout()\">Log out</a></li>\n          </ul>\n        </div>\n      </div>\n    </nav>\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
 
 /***/ }),
 
@@ -734,6 +734,7 @@ var EditorComponent = (function () {
     };
     EditorComponent.prototype.compile = function () {
         var _this = this;
+        this.showScore = false;
         this.input = this.queService.getInput();
         this.output = this.queService.getOutput();
         if (this.code !== '' && this.lang !== '') {
@@ -774,8 +775,9 @@ var EditorComponent = (function () {
         };
         this._loginService.getStudentMarks(data)
             .subscribe(function (res) {
+            console.log(res);
             console.log('scored marks : ', marks.marksScored);
-            if (res === undefined) {
+            if (res === undefined || res === null) {
                 var updatemarks = {
                     username: _this.auth.getUserName(),
                     year: _this.auth.getUserYear(),

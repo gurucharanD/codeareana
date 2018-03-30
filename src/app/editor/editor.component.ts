@@ -62,6 +62,7 @@ export class EditorComponent implements OnInit {
   }
 
   compile() {
+    this.showScore = false;
     this.input = this.queService.getInput();
     this.output = this.queService.getOutput();
 
@@ -109,8 +110,9 @@ export class EditorComponent implements OnInit {
 
     this._loginService.getStudentMarks(data)
       .subscribe(res => {
+        console.log(res);
         console.log('scored marks : ', marks.marksScored);
-        if (res === undefined) {
+        if (res === undefined || res === null ) {
           const updatemarks = {
             username: this.auth.getUserName(),
             year: this.auth.getUserYear(),

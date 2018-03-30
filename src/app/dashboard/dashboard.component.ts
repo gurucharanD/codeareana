@@ -142,15 +142,15 @@ export class DashboardComponent implements OnInit {
   }
 
   showQuiz() {
-    if (this.noQuestions) {
+        if (this.noQuestions) {
       this.noQuestions = false;
     }
     this.showQuestions = false;
     this.noQuiz = false;
-    this.quizDisplay = true;
     this.userSelectedWeek = this.form.get('week').value;
-
-    if (!this.isWeekAnswered(this.userSelectedWeek)) {
+    this.quizDisplay = false;
+    const result = this.isWeekAnswered(this.userSelectedWeek);
+    if (!result) {
 
       const data = {
         week: this.form.get('week').value,
@@ -170,6 +170,7 @@ export class DashboardComponent implements OnInit {
         for (const iterator of res) {
           this.fac_answers.push(iterator.answer);
         }
+        this.quizDisplay = true;
       });
     } else {
       alert('Quiz for the selected week is already attempted');
@@ -177,12 +178,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public isWeekAnswered(week) {
-    this.quizAnsweredWeeks.forEach(element => {
-      console.log(element.trim() === week.trim());
-      if (element.trim() === week.trim()) {
-        return true;
+    for (let i = 0; i < this.quizAnsweredWeeks.length; i++) {
+      if (this.quizAnsweredWeeks[i] === week) {
+          return true;
       }
-    });
+    }
     return false;
   }
 
