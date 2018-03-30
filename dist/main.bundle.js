@@ -6,15 +6,15 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module"
+		"dashboard.module.0"
 	],
 	"./faculty-login/faculty-login.module": [
 		"../../../../../src/app/faculty-login/faculty-login.module.ts",
-		"faculty-login.module"
+		"faculty-login.module.0"
 	],
 	"./register-user/register.module": [
 		"../../../../../src/app/register-user/register.module.ts",
-		"register.module"
+		"register.module.0"
 	]
 };
 function webpackAsyncContext(req) {
@@ -156,7 +156,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "a{\r\n    text-decoration: none;\r\n}\r\n\r\n#container{\r\n    padding-top: 3%;\r\n}\r\n", ""]);
+exports.push([module.i, "a{\r\n    text-decoration: none;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -169,7 +169,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <div class=\"demo-container\" mdl-shadow=\"2\">\n    <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>\n      <mdl-layout-header>\n        <mdl-layout-header-row>\n          <mdl-layout-title>Code Arena</mdl-layout-title>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <!-- Navigation. We hide it in small screens. -->\n          <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\n\n            <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/adminLogin\">Admin Login</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/login\">Student Login</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyLogin\">Faculty Login</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyRegister\">Faculty Register</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/registerUser\">Register Student</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\">Welcome {{user}}</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\" (click)=\"logout()\">Log out</a>\n          </nav>\n        </mdl-layout-header-row>\n      </mdl-layout-header>\n      <mdl-layout-drawer>\n        <mdl-layout-title>Code Arena</mdl-layout-title>\n        <nav class=\"mdl-navigation\">\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/adminLogin\">Admin Login</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/login\">Student Login</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyLogin\">Faculty Login</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyRegister\">Faculty Register</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/registerUser\">Register Student</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\">Welcome {{user}}</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\" (click)=\"logout()\">Log out</a>\n        </nav>\n      </mdl-layout-drawer>\n      <mdl-layout-content>\n        <!-- Your content goes here -->\n      </mdl-layout-content>\n    </mdl-layout>\n  </div>\n\n\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
+module.exports = "<div>\n  <nav class=\"navbar navbar-inverse\">\n      <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span> \n          </button>\n          <a class=\"navbar-brand\" href=\"#\">Code Arena</a>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n          <ul class=\"nav navbar-nav navbar-right\">\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/adminLogin\">Admin Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/login\">Student Login</a></li>\n            <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/facultyLogin\">Faculty Login</a></li>\n              <li><a *ngIf=\"!isLoggedIn\"  routerLink=\"/registerUser\">Register Student</a></li>\n              <li><a *ngIf=\"isLoggedIn\" >Welcome {{user}}</a></li>\n              <li><a *ngIf=\"isLoggedIn\"  (click)=\"logout()\">Log out</a></li>\n          </ul>\n        </div>\n      </div>\n    </nav>\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
 
 /***/ }),
 
@@ -323,7 +323,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_22__admin_admin_component__["a" /* AdminComponent */],
             __WEBPACK_IMPORTED_MODULE_23__mapping_mapping_component__["a" /* MappingComponent */],
             __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__["a" /* QuizComponent */],
-            __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__["a" /* FacRegisterComponent */]
+            __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__["a" /* FacRegisterComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__["a" /* MdlModule */],

@@ -109,7 +109,7 @@ import { FacRegisterComponent } from './fac-register/fac-register.component';
     AdminComponent,
     MappingComponent,
     QuizComponent,
-    FacRegisterComponent
+    FacRegisterComponent,
 
   ],
   imports: [
