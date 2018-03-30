@@ -6,15 +6,15 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module.0"
+		"dashboard.module"
 	],
 	"./faculty-login/faculty-login.module": [
 		"../../../../../src/app/faculty-login/faculty-login.module.ts",
-		"faculty-login.module.0"
+		"faculty-login.module"
 	],
 	"./register-user/register.module": [
 		"../../../../../src/app/register-user/register.module.ts",
-		"register.module.0"
+		"register.module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -41,7 +41,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".div{\n    \n    padding-left: 30%;\n    background-color: #f1f1ff;\n   }\n   \n   #loginForm{\n       margin-top: 3%;\n       box-shadow: 1px 1px 1px 2px;\n   }\n\n   input{\n       width:150%;\n   }\n\n   button{\n       margin:2%;  \n    width: 150%;\n    }", ""]);
+exports.push([module.i, "\n   \n    #loginForm{\n        margin-top:10%;\n       /* box-shadow: 1px 1px 1px 2px; */\n   } \n \n   mdl-card{\n       width:90%;\n       \n    padding: 5%;\n   }\n   ", ""]);
 
 // exports
 
@@ -54,7 +54,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/admin/admin.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div class=\"row\">\n  <div class=\"col-sm-3\"  style=\"margin-left:2%;margin-right:2%;\">\n    <img src=\"https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png\" width=\"100%\" height=\"70%\" alt=\"code\">\n  </div>\n  <div id=\"loginForm\" class=\"col-sm-8\">\n      <h1 style=\"margin-left:4%;text-shadow:2px 2px 2px;\">Admin Login</h1>\n    <form class=\"form-horizontal\" [formGroup]=\"form\">\n    <div class=\"form-group\">\n      <br><br>\n      <label class=\"control-label col-sm-5\" for=\"uname\">Username</label>\n      <div class=\"col-sm-2\">\n        <input type=\"text\" class=\"form-control\" formControlName=\"username\" name=\"uname\" placeholder=\"Enter Username\">\n      </div>\n    </div>\n    <div class=\"form-group\">\n      <label class=\"control-label col-sm-5\" for=\"pwd\">Password</label>\n      <div class=\"col-sm-2\">\n        <input type=\"password\" class=\"form-control\" formControlName=\"password\" name=\"password\" placeholder=\"Enter password\">\n      </div>\n    </div>\n    \n    <div class=\"form-group\"> \n      <div class=\"col-sm-offset-5 col-sm-2\">\n        <button type=\"submit\" class=\"btn btn-primary\" (click)=\"checkLogin()\">Login</button>\n        </div>\n      </div>\n    \n    \n  </form>\n  <br><br>"
+module.exports = "<div class=\"row\" style=\"background-image:url('../../assets/admin.gif');background-size:cover; height: 100vh;\nwidth: 100vw;\" >\n      <div class=\"col-sm-2\"></div>\n    <div id=\"loginForm\" class=\"col-sm-4\">\n        <mdl-card  mdl-shadow=\"8\">\n            <mdl-card-title mdl-card-expand>\n         <h4>\n            Admin Login\n            </h4>\n            </mdl-card-title>\n            <mdl-card-actions mdl-card-border>\n              <mdl-layout-spacer></mdl-layout-spacer>\n              <form class=\"form-horizontal\" [formGroup]=\"form\">\n                  <mdl-textfield\n                      type=\"text\"\n                      formControlName=\"username\"\n                      label=\"Username\"\n                      placeholder=\"Enter Username\"\n                      autofocus></mdl-textfield>\n                      <mdl-layout-spacer></mdl-layout-spacer>\n                    <mdl-textfield\n                      type=\"password\"\n                      formControlName=\"password\"\n                      label=\"Password\"\n                      placeholder=\"Enter Password\"\n                      autofocus></mdl-textfield>\n                  <mdl-layout-spacer></mdl-layout-spacer>\n                      <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"checkLogin()\">\n                          Login\n                        </button>  \n                        &nbsp; &nbsp;\n                        <mdl-spinner [active]=\"showRefresh\"></mdl-spinner>           \n                </form>\n            </mdl-card-actions>\n          </mdl-card>\n    </div>\n    </div>\n"
 
 /***/ }),
 
@@ -88,6 +88,7 @@ var AdminComponent = (function () {
         this.loginService = loginService;
         this.fb = fb;
         this.auth = auth;
+        this.showRefresh = false;
         this.username = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required);
         this.password = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required);
         this.isLoggedIn = false;
@@ -100,12 +101,13 @@ var AdminComponent = (function () {
         });
     };
     AdminComponent.prototype.checkLogin = function () {
-        // validate the user here
         var _this = this;
+        // validate the user here
         if (this.username.value === '' || this.password.value === '') {
             alert('Username/Password cannot be empty');
         }
         else {
+            this.showRefresh = true;
             var user = {
                 username: this.username.value,
                 password: this.password.value,
@@ -125,6 +127,7 @@ var AdminComponent = (function () {
                 else {
                     _this.isLoggedIn = false;
                     alert('Invalid USERNAME/PASSWORD!');
+                    _this.showRefresh = false;
                 }
             });
         }
@@ -153,7 +156,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "a{\r\n    text-decoration: none;\r\n}\r\n\r\n#container{\r\n    padding-top: 3%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -166,7 +169,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <nav class=\"navbar navbar-inverse\">\n    <div class=\"container-fluid\">\n      <div class=\"navbar-header\">\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n          <span class=\"icon-bar\"></span>\n          <span class=\"icon-bar\"></span>\n          <span class=\"icon-bar\"></span>\n        </button>\n        <a class=\"navbar-brand\" href=\"#\">Code Arena</a>\n      </div>\n      <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n        <ul class=\"nav navbar-nav navbar-right\">\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/adminLogin\">Admin Login</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/login\">Student Login</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/facultyLogin\">Faculty Login</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/facultyRegister\">Faculty Register</a>\n          </li>\n          <li>\n            <a *ngIf=\"!isLoggedIn\" routerLink=\"/registerUser\">Register Student</a>\n          </li>\n          <li>\n            <a *ngIf=\"isLoggedIn\">Welcome {{user}}</a>\n          </li>\n          <li>\n            <a *ngIf=\"isLoggedIn\" (click)=\"logout()\">Log out</a>\n          </li>\n        </ul>\n      </div>\n    </div>\n  </nav>\n\n\n\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
+module.exports = "<div>\n  <div class=\"demo-container\" mdl-shadow=\"2\">\n    <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>\n      <mdl-layout-header>\n        <mdl-layout-header-row>\n          <mdl-layout-title>Code Arena</mdl-layout-title>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <!-- Navigation. We hide it in small screens. -->\n          <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\n\n            <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/adminLogin\">Admin Login</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/login\">Student Login</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyLogin\">Faculty Login</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyRegister\">Faculty Register</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/registerUser\">Register Student</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\">Welcome {{user}}</a>\n\n              <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\" (click)=\"logout()\">Log out</a>\n          </nav>\n        </mdl-layout-header-row>\n      </mdl-layout-header>\n      <mdl-layout-drawer>\n        <mdl-layout-title>Code Arena</mdl-layout-title>\n        <nav class=\"mdl-navigation\">\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/adminLogin\">Admin Login</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/login\">Student Login</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyLogin\">Faculty Login</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/facultyRegister\">Faculty Register</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"!isLoggedIn\" routerLink=\"/registerUser\">Register Student</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\">Welcome {{user}}</a>\n\n          <a class=\"mdl-navigation__link\" *ngIf=\"isLoggedIn\" (click)=\"logout()\">Log out</a>\n        </nav>\n      </mdl-layout-drawer>\n      <mdl-layout-content>\n        <!-- Your content goes here -->\n      </mdl-layout-content>\n    </mdl-layout>\n  </div>\n\n\n\n  <div id=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n  <!-- <app-copyrights></app-copyrights> -->\n</div>\n"
 
 /***/ }),
 
@@ -323,7 +326,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__["a" /* FacRegisterComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__["c" /* MdlModule */],
+            __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__["a" /* MdlModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* ReactiveFormsModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_forms__["d" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_10__angular_http__["c" /* HttpModule */],
@@ -713,7 +716,7 @@ var EditorComponent = (function () {
         this.showScore = false;
         this.score = 0;
         this.wrong = 0;
-        this.code = "";
+        this.code = '';
         this.langOpt = 0;
         this.outputResult = true;
         this.showOutput = false;
@@ -722,25 +725,9 @@ var EditorComponent = (function () {
         this.question = this.queService.getSelectedQuestion();
     }
     EditorComponent.prototype.ngOnInit = function () {
-        // let timer = TimerObservable.create(500, 1000);
-        // this.subscription = timer.subscribe(t => {
-        //   var date = new Date(null);
-        //   if(60-t<=0)
-        //   {
-        //     alert("TIME'S UP!");
-        //     this.subscription.unsubscribe();
-        //     this.router.navigate(['dashboard']);
-        //   }
-        //   date.setSeconds(60-t); // specify value for SECONDS here
-        //   var result = date.toISOString().substr(11, 8);
-        //   this.tick = result;
-        // });
     };
-    // ngOnDestroy() {
-    //   this.subscription.unsubscribe();
-    // }
     EditorComponent.prototype.download = function () {
-        console.log("calling");
+        // console.log('calling');
         var doc = new __WEBPACK_IMPORTED_MODULE_4_jspdf__();
         doc.text(20, 20, this.code);
         doc.save('code.pdf');
@@ -749,21 +736,16 @@ var EditorComponent = (function () {
         var _this = this;
         this.input = this.queService.getInput();
         this.output = this.queService.getOutput();
-        if (this.code != "" && this.lang != "") {
+        if (this.code !== '' && this.lang !== '') {
             var code = {
                 code: this.code,
-                lang: parseInt(this.lang),
+                lang: parseInt(this.lang, 10),
                 input: this.input
             };
             this._loginService.compile(code)
                 .subscribe(function (res) {
                 _this.err = res;
-                // console.log(typeof res.toString());
-                // console.log(typeof this.output[0]);
-                // console.log(res);
-                // console.log(this.output[0].toString());
-                // console.log(res.toString().trim()==this.output[0].toString());
-                if (res.toString().trim() != _this.output[0].toString()) {
+                if (res.toString().trim() !== _this.output[0].toString()) {
                     _this.outputResult = false;
                     _this.sampleResult = false;
                 }
@@ -775,12 +757,12 @@ var EditorComponent = (function () {
             });
         }
         else {
-            alert("CODE / LANGUAGE cannot be empty");
+            alert('CODE / LANGUAGE cannot be empty');
         }
     };
     EditorComponent.prototype.submitScore = function () {
         var _this = this;
-        alert("Are you Sure You want to submit?");
+        alert('Are you Sure You want to submit?');
         var data = {
             username: this.auth.getUserName()
         };
@@ -792,8 +774,8 @@ var EditorComponent = (function () {
         };
         this._loginService.getStudentMarks(data)
             .subscribe(function (res) {
-            console.log("scored marks : ", marks.marksScored);
-            if (res == undefined) {
+            console.log('scored marks : ', marks.marksScored);
+            if (res === undefined) {
                 var updatemarks = {
                     username: _this.auth.getUserName(),
                     year: _this.auth.getUserYear(),
@@ -803,13 +785,13 @@ var EditorComponent = (function () {
                 };
                 console.log(updatemarks);
                 _this._loginService.saveMarks(updatemarks)
-                    .subscribe(function (res) {
-                    alert(res.msg);
+                    .subscribe(function (result) {
+                    alert(result.msg);
                     _this.router.navigate(['dashboard']);
                 });
             }
             else {
-                console.log("database :", res.marks);
+                console.log('database :', res.marks);
                 var usermarks = [];
                 usermarks = res.marks;
                 usermarks.push(marks);
@@ -820,12 +802,11 @@ var EditorComponent = (function () {
                     section: _this.auth.getUserSection(),
                     week: __WEBPACK_IMPORTED_MODULE_6_ng2_cookies_ng2_cookies__["Cookie"].get('week'),
                     marks: usermarks
-                    //existing ..marks
                 };
                 _this._loginService.submitMarks(Updatemarks)
-                    .subscribe(function (res) {
-                    console.log(res.marks);
-                    alert(res.msg);
+                    .subscribe(function (result) {
+                    console.log(result.marks);
+                    alert(result.msg);
                     _this.router.navigate(['dashboard']);
                 });
             }
@@ -835,22 +816,17 @@ var EditorComponent = (function () {
         var _this = this;
         this.input = this.queService.getInput();
         this.output = this.queService.getOutput();
-        if (this.code != "" && this.lang != "") {
+        if (this.code !== '' && this.lang !== '') {
             var code = {
                 code: this.code,
-                lang: parseInt(this.lang),
+                lang: parseInt(this.lang, 10),
                 input: this.input
             };
             this._loginService.run(code)
                 .subscribe(function (res) {
                 _this.err = res;
                 for (var i = 0; i < res.length; i++) {
-                    //   console.log(typeof res[i].toString());
-                    // console.log(typeof this.output[i]);
-                    // console.log(res);
-                    // console.log(this.output[i].toString());
-                    // console.log(res[i].toString().trim()==this.output[i].toString());
-                    if (res[i].toString().trim() != _this.output[i].toString()) {
+                    if (res[i].toString().trim() !== _this.output[i].toString()) {
                         _this.wrong++;
                         _this.outputResult = false;
                         break;
@@ -860,13 +836,14 @@ var EditorComponent = (function () {
                 _this.score = (res.length - _this.wrong) * 5 / res.length;
                 console.log(_this.score);
                 _this.showScore = true;
-                if (_this.outputResult)
+                if (_this.outputResult) {
                     _this.sampleResult = false;
+                }
                 _this.showOutput = true;
             });
         }
         else {
-            alert("CODE / LANGUAGE cannot be empty");
+            alert('CODE / LANGUAGE cannot be empty');
         }
     };
     return EditorComponent;
@@ -895,7 +872,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".div{\r\n    \r\n    padding-left: 30%;\r\n    background-color: #f1f1ff;\r\n   }\r\n   \r\n   #loginForm{\r\n       margin-top: 3%;\r\n       box-shadow: 1px 1px 1px 2px;\r\n   }\r\n\r\n\r\n   button{\r\n       margin:2%;  \r\n    width: 150%;\r\n    }\r\n\r\n    input{\r\n        width:150%;\r\n    }", ""]);
+exports.push([module.i, "\r\n   \r\n    #loginForm{\r\n        margin-top:15%;\r\n       /* box-shadow: 1px 1px 1px 2px; */\r\n    \r\n   } \r\n \r\n   mdl-card{\r\n       width:90%;\r\n       \r\n    padding: 5%;\r\n   }\r\n   ", ""]);
 
 // exports
 
@@ -908,7 +885,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/fac-register/fac-register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-sm-3\" style=\"margin-left:2%;margin-right:2%;\">\n    <img src=\"https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png\" width=\"100%\" height=\"70%\" alt=\"code\">\n  </div>\n  <div id=\"loginForm\" class=\"col-sm-8\">\n\n\n    <h1 style=\"margin-left:4%;text-shadow:2px 2px 2px;\">Register Faculty</h1>\n    <form class=\"form-horizontal\" [formGroup]=\"form\">\n      <div class=\"form-group\">\n        <br>\n        <br>\n        <label class=\"control-label col-sm-5\" for=\"uname\">Username</label>\n        <div class=\"col-sm-2\">\n          <input type=\"text\" class=\"form-control\" name=\"uname\" formControlName=\"username\" placeholder=\"Enter Username\">\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label class=\"control-label col-sm-5\" for=\"pwd\">Password</label>\n        <div class=\"col-sm-2\">\n          <input type=\"password\" class=\"form-control\" name=\"password\" formControlName=\"password\" placeholder=\"Enter password\">\n        </div>\n      </div>\n\n        <div class=\"form-group\">\n          <div class=\"col-sm-offset-5 col-sm-2\">\n            <button type=\"submit\" class=\"btn btn-primary\" (click)=\"registerFaculty()\">Register</button>\n            <button type=\"reset\" class=\"btn btn-danger\">Reset</button>\n          </div>\n        </div>\n    </form>\n    <br>\n    <br>\n\n   \n    "
+module.exports = "\n    <div class=\"row\" id =\"loginPage\" style=\"background-image:url('../../assets/facsignup.jpg');background-size:cover; height: 100vh;\n    width: 100vw;\" >\n      <div class=\"col-sm-4\"></div>\n      <!-- <div class=\"col-sm-3\"></div> -->\n    <div id=\"loginForm\" class=\"col-sm-4\">\n        <mdl-card  mdl-shadow=\"8\">\n            <mdl-card-title mdl-card-expand>\n         <h4>\n           Faculty Registration\n            </h4>\n            </mdl-card-title>\n            <mdl-card-actions mdl-card-border>\n              <mdl-layout-spacer></mdl-layout-spacer>\n              <form class=\"form-horizontal\" [formGroup]=\"form\">\n                      <mdl-textfield\n                      type=\"text\"\n                      formControlName=\"username\"\n                      label=\"Username\"\n                      placeholder=\"Enter Username\"\n                      autofocus></mdl-textfield>\n                      <mdl-layout-spacer></mdl-layout-spacer>\n                        <mdl-textfield\n                      type=\"password\"\n                      formControlName=\"password\"\n                      label=\"Password\"\n                      placeholder=\"Enter Password\"\n                      autofocus></mdl-textfield>\n                  <mdl-layout-spacer></mdl-layout-spacer>\n                      <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"facultyRegister()\">\n                          Register\n                        </button> \n                        &nbsp; &nbsp;\n                        <mdl-spinner [active]=\"showRefresh\"></mdl-spinner>              \n                </form>\n            </mdl-card-actions>\n          </mdl-card>\n    </div>\n    </div>  \n    "
 
 /***/ }),
 
@@ -952,7 +929,7 @@ var FacRegisterComponent = (function () {
             'section': this.section
         });
     };
-    FacRegisterComponent.prototype.registerFaculty = function () {
+    FacRegisterComponent.prototype.facultyRegister = function () {
         var _this = this;
         if (this.username.value === '' || this.password.value === '') {
             alert('Username/Password cannot be empty');
@@ -1347,7 +1324,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".div{\n    \n    padding-left: 30%;\n    background-color: #f1f1ff;\n   }\n   \n   #loginForm{\n       margin-top: 3%;\n       box-shadow: 1px 1px 1px 2px;\n   }\n\n   input{\n       width:150%;\n   }\n\n   button{\n       margin:2%;  \n    width: 150%;\n    }", ""]);
+exports.push([module.i, "\n   \n    #loginForm{\n        margin-top:10%;\n       /* box-shadow: 1px 1px 1px 2px; */\n    \n   } \n \n   mdl-card{\n       width:90%;\n       \n    padding: 5%;\n   }\n   ", ""]);
 
 // exports
 
@@ -1360,7 +1337,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div class=\"row\">\n<div class=\"col-sm-3\"  style=\"margin-left:2%;margin-right:2%;\">\n  <img src=\"https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png\" width=\"100%\" height=\"70%\" alt=\"code\">\n</div>\n<div id=\"loginForm\" class=\"col-sm-8\">\n    <h1 style=\"margin-left:4%;text-shadow:2px 2px 2px;\">Student Login</h1>\n  <form class=\"form-horizontal\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <br><br>\n    <label class=\"control-label col-sm-5\" for=\"uname\">Username</label>\n    <div class=\"col-sm-2\">\n      <input type=\"text\" class=\"form-control\" formControlName=\"username\" name=\"uname\" placeholder=\"Enter Username\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label class=\"control-label col-sm-5\" for=\"pwd\">Password</label>\n    <div class=\"col-sm-2\">\n      <input type=\"password\" class=\"form-control\" formControlName=\"password\" name=\"password\" placeholder=\"Enter password\">\n    </div>\n  </div>\n  \n  <div class=\"form-group\"> \n    <div class=\"col-sm-offset-5 col-sm-2\">\n      <button type=\"submit\" class=\"btn btn-primary\" (click)=\"checkLogin()\">Login</button>\n      </div>\n    </div>\n  \n  \n</form>\n<br><br>"
+module.exports = "<div class=\"row\" id =\"loginPage\" style=\"background-image:url('../../assets/login_background.gif');background-size:cover; height: 100vh;\nwidth: 100vw;\" >\n  <div class=\"col-sm-2\"></div>\n<div id=\"loginForm\" class=\"col-sm-4\">\n    <mdl-card  mdl-shadow=\"8\">\n        <mdl-card-title mdl-card-expand>\n     <h4>\n        Student Login\n        </h4>\n        </mdl-card-title>\n        <mdl-card-actions mdl-card-border>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <form class=\"form-horizontal\" [formGroup]=\"form\">\n                  <mdl-textfield\n                  type=\"text\"\n                  formControlName=\"username\"\n                  label=\"Username\"\n                  placeholder=\"Enter Username\"\n                  autofocus></mdl-textfield>\n                  <mdl-layout-spacer></mdl-layout-spacer>\n                    <mdl-textfield\n                  type=\"password\"\n                  formControlName=\"password\"\n                  label=\"Password\"\n                  placeholder=\"Enter Password\"\n                  autofocus></mdl-textfield>\n              <mdl-layout-spacer></mdl-layout-spacer>\n                  <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"checkLogin()\">\n                      Login\n                    </button> \n                    &nbsp; &nbsp;\n                    <mdl-spinner [active]=\"showRefresh\"></mdl-spinner>              \n            </form>\n        </mdl-card-actions>\n      </mdl-card>\n</div>\n</div>"
 
 /***/ }),
 
@@ -1397,6 +1374,7 @@ var LoginComponent = (function () {
         this.username = new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required);
         this.password = new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required);
         this.isLoggedIn = false;
+        this.showRefresh = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.form = this.fb.group({
@@ -1408,20 +1386,19 @@ var LoginComponent = (function () {
     LoginComponent.prototype.checkLogin = function () {
         // validate the user here
         var _this = this;
-        if (this.username.value == '' || this.password.value == '') {
-            alert("Username/Password cannot be empty");
+        if (this.username.value === '' || this.password.value === '') {
+            alert('Username/Password cannot be empty');
         }
         else {
             var user = {
                 username: this.username.value,
                 password: this.password.value,
             };
-            console.log(user);
-            //validation part
+            this.showRefresh = true;
             this.loginService.isValidUser(user)
                 .subscribe(function (res) {
-                //console.log(res);
-                if (res.result == 1) {
+                // console.log(res);
+                if (res.result === 1) {
                     _this.isLoggedIn = true;
                     _this.auth.setStudentLogin(true);
                     var userDetails = res.userDetails;
@@ -1432,7 +1409,8 @@ var LoginComponent = (function () {
                 }
                 else {
                     _this.isLoggedIn = false;
-                    alert("Invalid USERNAME/PASSWORD/YEAR!");
+                    alert('Invalid USERNAME/PASSWORD/YEAR!');
+                    _this.showRefresh = false;
                 }
             });
         }
@@ -1827,6 +1805,9 @@ var QuizService = (function () {
         console.log('in service', marks);
         return this.http.post('/api/savequizmarks', marks).map(function (res) { return res.json(); });
     };
+    QuizService.prototype.getAnsweredQuizWeeks = function (user) {
+        return this.http.post('api/getAnsweredQuizWeeks', user).map(function (res) { return res.json(); });
+    };
     return QuizService;
 }());
 QuizService = __decorate([
@@ -2125,7 +2106,7 @@ var UserAccountService = (function () {
         this.uname = credentials.uname;
     };
     UserAccountService.prototype.getCredentials = function () {
-        return { "uname": this.uname, "isLoggedIn": this.isLoggedIn };
+        return { 'uname': this.uname, 'isLoggedIn': this.isLoggedIn };
     };
     return UserAccountService;
 }());

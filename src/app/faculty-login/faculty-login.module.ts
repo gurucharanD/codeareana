@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FacultyLoginRoutingModule } from './faculty-login-routing.module';
 import { FacultyLoginComponent } from './faculty-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MdlModule } from '@angular-mdl/core';
 
 @NgModule({
   imports: [
+    MdlModule,
     CommonModule,
     FacultyLoginRoutingModule,
     FormsModule,

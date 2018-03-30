@@ -47,7 +47,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".div{\n    padding:10%;\n    padding-left: 30%;\n    background-color: #f1f1ff;\n\n}\n   \n   #loginForm{\n    margin-top:3%;\n        box-shadow: 1px 1px 1px 2px;\n   }\n\n\n   input{\n    width:150%;\n}\n\n\n   button{\n       width:150%;\n       margin:2%;  \n   }", ""]);
+exports.push([module.i, "\n   \n    #loginForm{\n        margin-top:10%;\n       /* box-shadow: 1px 1px 1px 2px; */\n    \n   } \n \n   mdl-card{\n       width:90%;\n       \n    padding: 5%;\n   }\n   ", ""]);
 
 // exports
 
@@ -60,7 +60,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/faculty-login/faculty-login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\">\n<div class=\"col-sm-3\"  style=\"margin-left:2%;margin-right:2%;\">\n  <img src=\"https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png\" width=\"100%\" height=\"70%\" alt=\"code\">\n</div>\n<div id=\"loginForm\" class=\"col-sm-8\">\n\n\n<h1 style=\"margin-left:4%;text-shadow:2px 2px 2px;\">Faculty Login</h1>\n<form class=\"form-horizontal\" [formGroup]=\"form\">\n  <div class=\"form-group\"><br><br>\n    <label class=\"control-label col-sm-5\" for=\"uname\">Username</label>\n    <div class=\"col-sm-2\">\n      <input type=\"text\" class=\"form-control\" formControlName=\"username\"  name=\"uname\" placeholder=\"Enter Username\">\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label class=\"control-label col-sm-5\" for=\"pwd\">Password</label>\n    <div class=\"col-sm-2\">\n      <input type=\"password\" class=\"form-control\"  formControlName=\"password\" name=\"password\" placeholder=\"Enter password\">\n    </div>\n  </div>\n\n  <div class=\"form-group\"> \n    <div class=\"col-sm-offset-5 col-sm-2\">\n      <button type=\"submit\" class=\"btn btn-primary\" (click)=\"checkLogin()\">Login</button>\n    </div>\n  </div>\n</form>\n<br><br>"
+module.exports = "<div class=\"row\" id =\"loginPage\" style=\"background-image:url('../../assets/faculty.jpg');background-size:cover; height: 100vh;\nwidth: 100vw;\" >\n  <div class=\"col-sm-2\"></div>\n<div id=\"loginForm\" class=\"col-sm-4\">\n    <mdl-card  mdl-shadow=\"8\">\n        <mdl-card-title mdl-card-expand>\n     <h4>\n        Faculty Login\n        </h4>\n        </mdl-card-title>\n        <mdl-card-actions mdl-card-border>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <form class=\"form-horizontal\" [formGroup]=\"form\">\n                  <mdl-textfield\n                  type=\"text\"\n                  formControlName=\"username\"\n                  label=\"Username\"\n                  placeholder=\"Enter Username\"\n                  autofocus></mdl-textfield>\n                  <mdl-layout-spacer></mdl-layout-spacer>\n                    <mdl-textfield\n                  type=\"password\"\n                  formControlName=\"password\"\n                  label=\"Password\"\n                  placeholder=\"Enter Password\"\n                  autofocus></mdl-textfield>\n              <mdl-layout-spacer></mdl-layout-spacer>\n                  <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"checkLogin()\">\n                      Login\n                    </button> \n                    &nbsp; &nbsp;\n                    <mdl-spinner [active]=\"showRefresh\"></mdl-spinner>              \n            </form>\n        </mdl-card-actions>\n      </mdl-card>\n</div>\n</div>"
 
 /***/ }),
 
@@ -168,12 +168,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__faculty_login_routing_module__ = __webpack_require__("../../../../../src/app/faculty-login/faculty-login-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__faculty_login_component__ = __webpack_require__("../../../../../src/app/faculty-login/faculty-login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_mdl_core__ = __webpack_require__("../../../../@angular-mdl/core/components/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -187,6 +189,7 @@ var FacultyLoginModule = (function () {
 FacultyLoginModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         imports: [
+            __WEBPACK_IMPORTED_MODULE_5__angular_mdl_core__["a" /* MdlModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
             __WEBPACK_IMPORTED_MODULE_2__faculty_login_routing_module__["a" /* FacultyLoginRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_forms__["d" /* FormsModule */],

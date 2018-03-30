@@ -1,42 +1,53 @@
 <div>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Code Arena</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a *ngIf="!isLoggedIn" routerLink="/adminLogin">Admin Login</a>
-          </li>
-          <li>
-            <a *ngIf="!isLoggedIn" routerLink="/login">Student Login</a>
-          </li>
-          <li>
-            <a *ngIf="!isLoggedIn" routerLink="/facultyLogin">Faculty Login</a>
-          </li>
-          <li>
-            <a *ngIf="!isLoggedIn" routerLink="/facultyRegister">Faculty Register</a>
-          </li>
-          <li>
-            <a *ngIf="!isLoggedIn" routerLink="/registerUser">Register Student</a>
-          </li>
-          <li>
-            <a *ngIf="isLoggedIn">Welcome {{user}}</a>
-          </li>
-          <li>
-            <a *ngIf="isLoggedIn" (click)="logout()">Log out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div class="demo-container" mdl-shadow="2">
+    <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>
+      <mdl-layout-header>
+        <mdl-layout-header-row>
+          <mdl-layout-title>Code Arena</mdl-layout-title>
+          <mdl-layout-spacer></mdl-layout-spacer>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
 
+            <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/adminLogin">Admin Login</a>
+
+              <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/login">Student Login</a>
+
+              <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/facultyLogin">Faculty Login</a>
+
+              <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/facultyRegister">Faculty Register</a>
+
+              <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/registerUser">Register Student</a>
+
+              <a class="mdl-navigation__link" *ngIf="isLoggedIn">Welcome {{user}}</a>
+
+              <a class="mdl-navigation__link" *ngIf="isLoggedIn" (click)="logout()">Log out</a>
+          </nav>
+        </mdl-layout-header-row>
+      </mdl-layout-header>
+      <mdl-layout-drawer>
+        <mdl-layout-title>Code Arena</mdl-layout-title>
+        <nav class="mdl-navigation">
+
+          <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/adminLogin">Admin Login</a>
+
+          <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/login">Student Login</a>
+
+          <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/facultyLogin">Faculty Login</a>
+
+          <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/facultyRegister">Faculty Register</a>
+
+          <a class="mdl-navigation__link" *ngIf="!isLoggedIn" routerLink="/registerUser">Register Student</a>
+
+          <a class="mdl-navigation__link" *ngIf="isLoggedIn">Welcome {{user}}</a>
+
+          <a class="mdl-navigation__link" *ngIf="isLoggedIn" (click)="logout()">Log out</a>
+        </nav>
+      </mdl-layout-drawer>
+      <mdl-layout-content>
+        <!-- Your content goes here -->
+      </mdl-layout-content>
+    </mdl-layout>
+  </div>
 
 
 

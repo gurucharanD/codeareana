@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 
 import { RegisterRoutingModule } from './register-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdlShadowModule, MdlButtonModule, MdlTextFieldModule, MdlCardModule, MdlRadioModule, MdlRadioGroupRegisty } from '@angular-mdl/core';
+import {
+  MdlShadowModule, MdlModule, MdlRadioGroupRegisty
+} from '@angular-mdl/core';
 
 @NgModule({
   imports: [
@@ -12,14 +14,13 @@ import { MdlShadowModule, MdlButtonModule, MdlTextFieldModule, MdlCardModule, Md
     RegisterRoutingModule,
     FormsModule,
     MdlShadowModule,
-    MdlButtonModule,
+    MdlModule,
     ReactiveFormsModule,
-    MdlTextFieldModule,
-    MdlCardModule,
-    MdlRadioModule,
-    
+
+
+
   ],
-  providers:[MdlRadioGroupRegisty],
+  providers: [MdlRadioGroupRegisty],
   declarations: [RegisterUserComponent]
 })
 export class RegisterModule { }

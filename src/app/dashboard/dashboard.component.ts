@@ -18,7 +18,7 @@ import { RouterModule, Routes, Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-
+  userSelectedWeek;
   score = 0;
   questions: Question[];
   wrong_answers = [];
@@ -35,11 +35,14 @@ export class DashboardComponent implements OnInit {
   quizDisplay = false;
   marksDisplay = false;
 
+
   answeredQuestions;
   displayQuestions: Question[] = [];
   k = 0;
   form: FormGroup;
   week: FormControl;
+
+  quizAnsweredWeeks = [];
 
   constructor(
     private queService: QueServiceService,
@@ -47,17 +50,30 @@ export class DashboardComponent implements OnInit {
     private _loginService: LoginService,
     private router: Router,
     private authService: AuthenticationService,
+    private quizService: QuizService,
     private quiz: QuizService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       week: ['', Validators.required]
     });
+
+
+    const query = {
+      username: this.authService.username,
+      year: this.authService.studentYear,
+      section: this.authService.studentSection
+    };
+
+    this.quizService.getAnsweredQuizWeeks(query).subscribe(res => {
+      this.quizAnsweredWeeks = res;
+    });
+
   }
 
   sendQuestion(question) {
     this.queService.selectedQuestion(question);
-    console.log(question);
+    // console.log(question);
     this.router.navigate(['editor']);
   }
 
@@ -72,7 +88,7 @@ export class DashboardComponent implements OnInit {
     this._loginService.getAnsweredQuestions(query)
       .subscribe(res => {
         this.answeredQuestions = res;
-        console.log(this.answeredQuestions);
+        // console.log(this.answeredQuestions);
         this.getTotalQuestions();
       });
   }
@@ -86,7 +102,7 @@ export class DashboardComponent implements OnInit {
       year: this.authService.getUserYear(),
       section: this.authService.getUserSection()
     };
-    console.log(data);
+    // console.log(data);
     this._loginService.getQuestions(data).subscribe(res => {
       this.questions = res;
       if (this.questions.length === 0) {
@@ -108,8 +124,8 @@ export class DashboardComponent implements OnInit {
   calculateArray() {
     const aq = this.answeredQuestions[0]['marks'];
 
-    console.log(aq);
-    console.log(this.questions);
+    // console.log(aq);
+    // console.log(this.questions);
 
     let i, j;
     for (i = 0; i < this.questions.length; i++) {
@@ -122,7 +138,7 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    console.log(this.displayQuestions);
+    // console.log(this.displayQuestions);
   }
 
   showQuiz() {
@@ -132,48 +148,67 @@ export class DashboardComponent implements OnInit {
     this.showQuestions = false;
     this.noQuiz = false;
     this.quizDisplay = true;
-    const data = {
-      week: this.form.get('week').value,
-      year: this.authService.getUserYear(),
-      section: this.authService.getUserSection().toLowerCase()
-    };
-    console.log(data);
+    this.userSelectedWeek = this.form.get('week').value;
 
-    this.quiz.getQuizQuestions(data).subscribe(res => {
-      console.log(res);
-      if (res.length === 0) {
-        this.quizDisplay = false;
-        this.noQuiz = true;
-      }
-      this.marksDisplay = false;
-      this.quizQuestions = res;
-      for (const iterator of res) {
-        this.fac_answers.push(iterator.answer);
+    if (!this.isWeekAnswered(this.userSelectedWeek)) {
+
+      const data = {
+        week: this.form.get('week').value,
+        year: this.authService.getUserYear(),
+        section: this.authService.getUserSection().toLowerCase()
+      };
+      // console.log(data);
+
+      this.quiz.getQuizQuestions(data).subscribe(res => {
+        // console.log(res);
+        if (res.length === 0) {
+          this.quizDisplay = false;
+          this.noQuiz = true;
+        }
+        this.marksDisplay = false;
+        this.quizQuestions = res;
+        for (const iterator of res) {
+          this.fac_answers.push(iterator.answer);
+        }
+      });
+    } else {
+      alert('Quiz for the selected week is already attempted');
+    }
+  }
+
+  public isWeekAnswered(week) {
+    this.quizAnsweredWeeks.forEach(element => {
+      console.log(element.trim() === week.trim());
+      if (element.trim() === week.trim()) {
+        return true;
       }
     });
+    return false;
   }
+
 
   validateAnswers() {
     for (let i = 0; i < this.stu_answers.length; i++) {
-      if (this.stu_answers[i] == this.fac_answers[i]) {
+      if (this.stu_answers[i] === this.fac_answers[i]) {
         this.score += 1;
       } else {
         this.wrong_answers.push(i);
       }
     }
     this.quizDisplay = false;
-    console.log(this.score);
+    // console.log(this.score);
     this.marksDisplay = true;
     const data = {
       username: this.authService.getUserName(),
       week: this.form.get('week').value,
       year: this.authService.getUserYear(),
       section: this.authService.getUserSection(),
-      quizmarks: this.score
+      quizmarks: this.score,
+      attemptedQuizWeek: this.userSelectedWeek
     };
-    console.log('in component', data);
+    // console.log('in component', data);
     this.quiz.saveQuizMarks(data).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       if (res.data == null && res.userdata == null) {
         window.alert('Marks Not Saved !!!');
       } else {

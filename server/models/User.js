@@ -6,7 +6,8 @@ const userSchema= new Schema({
     year:Number,
     section:String,
     marks:Number,
-    quizmarks:Number
+    quizmarks:Number,
+    attemptedQuizWeeks:[]
 });
 
 module.exports  =  mongoose.model('user',userSchema,'users');

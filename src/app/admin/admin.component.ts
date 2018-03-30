@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
 
   form: FormGroup;
 
-
+  showRefresh  = false;
   public username = new FormControl('', Validators.required);
   public password = new FormControl('', Validators.required);
 
@@ -38,10 +38,10 @@ export class AdminComponent implements OnInit {
 
   checkLogin() {
     // validate the user here
-
     if (this.username.value === '' || this.password.value === '') {
       alert('Username/Password cannot be empty');
     } else {
+    this.showRefresh = true;
       const user = {
         username: this.username.value,
         password: this.password.value,
@@ -60,10 +60,13 @@ export class AdminComponent implements OnInit {
           } else {
             this.isLoggedIn = false;
             alert('Invalid USERNAME/PASSWORD!');
+            this.showRefresh = false;
           }
         });
     }
 
   }
+
+
 
 }

@@ -38,7 +38,7 @@ export class FacRegisterComponent implements OnInit {
 
   }
 
-  registerFaculty() {
+  facultyRegister() {
     if (this.username.value === '' || this.password.value === '') {
       alert('Username/Password cannot be empty');
     } else {

@@ -2689,7 +2689,7 @@ MdlIconModule.ctorParameters = function () { return []; };
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return MdlModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MdlModule; });
 /* unused harmony export MdlNonRootModule */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_mdl_ripple_directive__ = __webpack_require__("../../../../@angular-mdl/core/components/common/mdl-ripple.directive.js");
@@ -2718,19 +2718,6 @@ MdlIconModule.ctorParameters = function () { return []; };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__textfield_mdl_textfield_component__ = __webpack_require__("../../../../@angular-mdl/core/components/textfield/mdl-textfield.component.js");
 /* unused harmony namespace reexport */
 /* unused harmony namespace reexport */
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__button_mdl_button_component__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_5__card_mdl_card_component__["a"]; });
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* unused harmony namespace reexport */
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_10__radio_mdl_radio_component__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_10__radio_mdl_radio_component__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_4__shadow_mdl_shadow_directive__["a"]; });
 /* unused harmony namespace reexport */
 /* unused harmony namespace reexport */
 /* unused harmony namespace reexport */
@@ -2740,7 +2727,19 @@ MdlIconModule.ctorParameters = function () { return []; };
 /* unused harmony namespace reexport */
 /* unused harmony namespace reexport */
 /* unused harmony namespace reexport */
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_24__textfield_mdl_textfield_component__["a"]; });
+/* unused harmony namespace reexport */
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_10__radio_mdl_radio_component__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__shadow_mdl_shadow_directive__["a"]; });
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
+/* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__dialog_outlet_mdl_backdrop_overlay_component__ = __webpack_require__("../../../../@angular-mdl/core/components/dialog-outlet/mdl-backdrop-overlay.component.js");
 /* unused harmony reexport Private1 */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__dialog_mdl_dialog_host_component__ = __webpack_require__("../../../../@angular-mdl/core/components/dialog/mdl-dialog-host.component.js");

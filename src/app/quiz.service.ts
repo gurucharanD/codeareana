@@ -19,4 +19,9 @@ export class QuizService {
 
     return this.http.post('/api/savequizmarks', marks).map(res => res.json());
   }
+
+getAnsweredQuizWeeks(user) {
+  return this.http.post('api/getAnsweredQuizWeeks', user).map(res => res.json());
+}
+
 }

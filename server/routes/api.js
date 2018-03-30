@@ -16,7 +16,7 @@ const directory = 'code/python';
 
 const router = express.Router();
 
-const db = "mongodb://codearena:codearena@ds023613.mlab.com:23613/codearena";
+const db = "mongodb://localhost:27017";
 
 mongoose.Promise = global.Promise;
 
@@ -583,6 +583,7 @@ router.post('/savequizmarks', (req, res) => {
   section = req.body.section;
   week = req.body.week;
   quizmarks = req.body.quizmarks;
+  attemptedQuizWeek = req.body.attemptedQuizWeek;
 
   Marks.findOneAndUpdate({
       username: username,
@@ -606,7 +607,11 @@ router.post('/savequizmarks', (req, res) => {
           section: section
         }, {
           $inc: {
-            quizmarks: quizmarks
+            quizmarks: quizmarks,
+          },
+          $push:
+          {
+            attemptedQuizWeeks:attemptedQuizWeek
           }
         }, (err, userdata) => {
           if (err) {
@@ -627,6 +632,23 @@ router.post('/savequizmarks', (req, res) => {
 
 
 })
+
+router.post('/getAnsweredQuizWeeks',(req,res)=>{
+  User.findOne({
+    username: req.body.username,
+    year: req.body.year,
+    section: req.body.section
+  },(err,data)=>{
+    console.log(data);
+    if(err) console.log(err);
+    res.json(data.attemptedQuizWeeks);
+  });
+})
+
+
+
+
+
 
 router.post('/adminLogin', function (req, res) {
 

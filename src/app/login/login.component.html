@@ -1,32 +1,37 @@
-
-
-<div class="row">
-<div class="col-sm-3"  style="margin-left:2%;margin-right:2%;">
-  <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png" width="100%" height="70%" alt="code">
+<div class="row" id ="loginPage" style="background-image:url('../../assets/login_background.gif');background-size:cover; height: 100vh;
+width: 100vw;" >
+  <div class="col-sm-2"></div>
+<div id="loginForm" class="col-sm-4">
+    <mdl-card  mdl-shadow="8">
+        <mdl-card-title mdl-card-expand>
+     <h4>
+        Student Login
+        </h4>
+        </mdl-card-title>
+        <mdl-card-actions mdl-card-border>
+          <mdl-layout-spacer></mdl-layout-spacer>
+          <form class="form-horizontal" [formGroup]="form">
+                  <mdl-textfield
+                  type="text"
+                  formControlName="username"
+                  label="Username"
+                  placeholder="Enter Username"
+                  autofocus></mdl-textfield>
+                  <mdl-layout-spacer></mdl-layout-spacer>
+                    <mdl-textfield
+                  type="password"
+                  formControlName="password"
+                  label="Password"
+                  placeholder="Enter Password"
+                  autofocus></mdl-textfield>
+              <mdl-layout-spacer></mdl-layout-spacer>
+                  <button mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="checkLogin()">
+                      Login
+                    </button> 
+                    &nbsp; &nbsp;
+                    <mdl-spinner [active]="showRefresh"></mdl-spinner>              
+            </form>
+        </mdl-card-actions>
+      </mdl-card>
 </div>
-<div id="loginForm" class="col-sm-8">
-    <h1 style="margin-left:4%;text-shadow:2px 2px 2px;">Student Login</h1>
-  <form class="form-horizontal" [formGroup]="form">
-  <div class="form-group">
-    <br><br>
-    <label class="control-label col-sm-5" for="uname">Username</label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" formControlName="username" name="uname" placeholder="Enter Username">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-5" for="pwd">Password</label>
-    <div class="col-sm-2">
-      <input type="password" class="form-control" formControlName="password" name="password" placeholder="Enter password">
-    </div>
-  </div>
-  
-  <div class="form-group"> 
-    <div class="col-sm-offset-5 col-sm-2">
-      <button type="submit" class="btn btn-primary" (click)="checkLogin()">Login</button>
-      </div>
-    </div>
-  
-  
-</form>
-<br><br>
+</div>

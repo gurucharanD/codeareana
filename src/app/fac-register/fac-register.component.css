@@ -1,20 +1,14 @@
-.div{
+
+   
+    #loginForm{
+        margin-top:15%;
+       /* box-shadow: 1px 1px 1px 2px; */
     
-    padding-left: 30%;
-    background-color: #f1f1ff;
+   } 
+ 
+   mdl-card{
+       width:90%;
+       
+    padding: 5%;
    }
    
-   #loginForm{
-       margin-top: 3%;
-       box-shadow: 1px 1px 1px 2px;
-   }
-
-
-   button{
-       margin:2%;  
-    width: 150%;
-    }
-
-    input{
-        width:150%;
-    }
