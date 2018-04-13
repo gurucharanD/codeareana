@@ -1,5 +1,5 @@
 import { AuthenticationService } from './../authentication.service';
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { QueServiceService } from '../que-service.service';
 import { LoginService } from '../login-service.service';
 import * as jsPDF from 'jspdf';
@@ -18,6 +18,8 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 })
 export class EditorComponent implements OnInit {
 
+  @ViewChild('editor') editor;
+  options: any = { maxLines: 1000, printMargin: false };
   showScore = false;
   score = 0;
   wrong = 0;
@@ -33,7 +35,7 @@ export class EditorComponent implements OnInit {
   time: string;
   err;
 
-  outputResult= true;
+  outputResult = true;
   showOutput = false;
   sampleResult = false;
 
@@ -42,14 +44,20 @@ export class EditorComponent implements OnInit {
   timeOfProblem = 60;
 
   constructor(@Inject('Window') private window: Window, private auth: AuthenticationService,
-   private router: Router, private queService: QueServiceService, private _loginService: LoginService) {
+    private router: Router, private queService: QueServiceService, private _loginService: LoginService) {
     this.question = this.queService.getSelectedQuestion();
 
 
   }
 
   ngOnInit() {
+
   }
+
+
+  onChange(code) {
+    console.log('new code', code);
+}
 
 
 
@@ -61,20 +69,18 @@ export class EditorComponent implements OnInit {
     doc.save('code.pdf');
   }
 
-  compile() {
+  runSampleTestCases() {
     this.showScore = false;
     this.input = this.queService.getInput();
     this.output = this.queService.getOutput();
-
+    console.log(this.input);
     if (this.code !== '' && this.lang !== '') {
 
       const code = {
         code: this.code,
         lang: parseInt(this.lang, 10),
-        input: this.input
+        input: this.input[0]
       };
-
-
       this._loginService.compile(code)
         .subscribe(res => {
           this.err = res;
@@ -110,9 +116,9 @@ export class EditorComponent implements OnInit {
 
     this._loginService.getStudentMarks(data)
       .subscribe(res => {
-        console.log(res);
-        console.log('scored marks : ', marks.marksScored);
-        if (res === undefined || res === null ) {
+        // console.log(res);
+        // console.log('scored marks : ', marks.marksScored);
+        if (res === undefined || res === null) {
           const updatemarks = {
             username: this.auth.getUserName(),
             year: this.auth.getUserYear(),

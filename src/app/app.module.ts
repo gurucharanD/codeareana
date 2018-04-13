@@ -91,7 +91,7 @@ import {
   QuizComponent
 } from './quiz/quiz.component';
 import { FacRegisterComponent } from './fac-register/fac-register.component';
-
+import { AceEditorModule } from 'ng2-ace-editor';
 
 
 
@@ -113,6 +113,7 @@ import { FacRegisterComponent } from './fac-register/fac-register.component';
 
   ],
   imports: [
+    AceEditorModule,
     MdlModule,
     ReactiveFormsModule,
     FormsModule,

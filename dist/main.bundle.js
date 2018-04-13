@@ -6,15 +6,15 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module.0"
+		"dashboard.module"
 	],
 	"./faculty-login/faculty-login.module": [
 		"../../../../../src/app/faculty-login/faculty-login.module.ts",
-		"faculty-login.module.0"
+		"faculty-login.module"
 	],
 	"./register-user/register.module": [
 		"../../../../../src/app/register-user/register.module.ts",
-		"register.module.0"
+		"register.module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -269,12 +269,14 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__ = __webpack_require__("../../../../@angular-mdl/core/components/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__ = __webpack_require__("../../../../../src/app/quiz/quiz.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__ = __webpack_require__("../../../../../src/app/fac-register/fac-register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_ng2_ace_editor__ = __webpack_require__("../../../../ng2-ace-editor/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -326,6 +328,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__["a" /* FacRegisterComponent */],
         ],
         imports: [
+            __WEBPACK_IMPORTED_MODULE_28_ng2_ace_editor__["a" /* AceEditorModule */],
             __WEBPACK_IMPORTED_MODULE_25__angular_mdl_core__["a" /* MdlModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* ReactiveFormsModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_forms__["d" /* FormsModule */],
@@ -405,7 +408,7 @@ var router = [{
     },
     {
         path: 'editor',
-        canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_guard__["a" /* AuthGuard */]],
+        // canActivate: [AuthGuard],
         component: __WEBPACK_IMPORTED_MODULE_4__editor_editor_component__["a" /* EditorComponent */]
     },
     {
@@ -656,7 +659,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\n#output{\n    margin: 2%;\n    padding: 2%;\n   \n} \n\ninput{\n    width:30%;\n}\n\ntextarea{\n    resize: none;\n}\n\n#questionPart {\n\n    border: 1px solid black;\n    margin: 2%;\n    box-shadow: 2px 1px 1px;\n    width: 40%;\n    float: left;\n    height: 100%;\n}\n#editorPart {\n    width: 60%;\n    float: left;\n    height: 100%;\n}\n\nselect{\n    width:100%;\n}\n", ""]);
+exports.push([module.i, "\n#output{\n    margin: 2%;\n    padding: 2%;\n   \n} \n\ninput{\n    width:30%;\n}\n\ntextarea{\n    resize: none;\n}\n\n#questionPart {\n\n    border: 1px solid black;\n    margin-left: 2%;\n    margin-bottom: 2%;\n    margin-right: 2%;\n    box-shadow: 2px 1px 1px;\n    width: 40%;\n    float: left;\n    height: 100%;\n}\n#editorPart {\n    width: 60%;\n    float: left;\n    height: 100%;\n}\n\nselect{\n    width:100%;\n}\n", ""]);
 
 // exports
 
@@ -669,7 +672,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/editor/editor.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"editor\">\n    <div class=\"col-sm-6\" id=\"questionPart\" style=\"display:block;height:100%px;overflow:scroll;\">\n      <h1>{{question.name}}</h1>\n      <p>{{question.question}}</p>\n    </div>\n    <div class=\"editorPart\">\n    <div class=\"col-sm-6\" id=\"editor\">\n      <textarea style=\"overflow:scroll;font-size:100%;\" rows=\"30\" cols=\"86\" id=\"code\" placeholder=\"Enter your code here\" [(ngModel)]=\"code\" onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}\">\n      </textarea>\n\n      <div style=\"margin:4%;padding:2%;box-shadow:1px 1px 2px\">\n        <label for=\"language\">language</label>\n        <select name=\"lang\" id=\"lang\" [(ngModel)]=\"lang\">\n          <option value=\"1\">PYTHON</option>\n          <!-- <option value=\"2\">JAVA</option>\n          <option value=\"3\">C</option> -->\n        </select>\n        <br>\n        <input style=\"margin:2%;\" type=\"submit\" value=\"Run Sample Test Case\" (click)=\"compile()\" class=\"btn btn-primary\">\n        <input type=\"submit\" style=\"margin:2%;\" value=\"Run All Test Cases\" class=\"btn btn-danger\" (click)=\"run()\">\n        <br>\n        <button (click)=\"download()\" style=\"margin:2%;\" class=\"btn btn-warning\">Download Code</button>\n        <input type=\"submit\" name=\"submitScore\" style=\"margin:2%;\" value=\"submit\" (click)=\"submitScore()\" class=\"btn btn-success\">\n      </div>\n    </div>\n  </div>\n  <div  id=\"output\" *ngIf=\"showOutput\">\n    <h4 *ngIf=\"sampleResult\" style=\"color:green\">Output: Sample Test Cases Passed</h4>\n    <h4 *ngIf=\"outputResult\" style=\"color:green\">Output : CORRECT RESULT</h4>\n    <h4 *ngIf=\"!outputResult\" style=\"color:red\">Output : INCORRECT RESULT</h4>\n    <h4 *ngIf=\"showScore\" style=\"color:violet\">Score : {{score}}/5</h4>\n    <h4 *ngIf=\"!outputResult\" style=\"color:red\">\n      <h4>Your Output: </h4>{{err}}</h4>\n  </div>\n</div>\n"
+module.exports = "<div id=\"editor\">\n    <div class=\"col-sm-6\" id=\"questionPart\" style=\"display:block;min-height:500px;overflow:scroll;\">\n      <h1>{{question.name}}</h1>\n      <p>{{question.question}}</p>\n    </div>\n    <div class=\"editorPart\">\n    <div class=\"col-sm-6\">\n      <div ace-editor\n      #editor\n      [(text)]=\"code\" \n      [mode]=\"'javascript'\" \n      [options]=\"options\"\n      [readOnly]=\"false\"\n      [autoUpdateContent]=\"true\"\n      [durationBeforeCallback]=\"1000\"\n      (textChanged)=\"onChange($event)\"\n      style=\"min-height: 500px; width:100%; font-size:120%; overflow: scroll;\"></div>\n\n      <div style=\"margin:4%;padding:2%;box-shadow:1px 1px 2px\">\n        <label for=\"language\">language</label>\n        <select name=\"lang\" id=\"lang\" [(ngModel)]=\"lang\">\n          <option value=\"1\">PYTHON</option>\n          <option value=\"2\">JAVA</option>\n          <!-- <option value=\"3\">C</option> --> \n        </select>\n        <br>\n        <input style=\"margin:2%;\" type=\"submit\" value=\"Run Sample Test Case\" (click)=\"runSampleTestCases()\" class=\"btn btn-primary\">\n        <input type=\"submit\" style=\"margin:2%;\" value=\"Run All Test Cases\" class=\"btn btn-danger\" (click)=\"run()\">\n        <br>\n        <button (click)=\"download()\" style=\"margin:2%;\" class=\"btn btn-warning\">Download Code</button>\n        <input type=\"submit\" name=\"submitScore\" style=\"margin:2%;\" value=\"submit\" (click)=\"submitScore()\" class=\"btn btn-success\">\n      </div>\n    </div>\n  </div>\n  <div  id=\"output\" *ngIf=\"showOutput\">\n    <h4 *ngIf=\"sampleResult\" style=\"color:green\">Output: Sample Test Cases Passed</h4>\n    <h4 *ngIf=\"outputResult\" style=\"color:green\">Output : CORRECT RESULT</h4>\n    <h4 *ngIf=\"!outputResult\" style=\"color:red\">Output : INCORRECT RESULT</h4>\n    <h4 *ngIf=\"showScore\" style=\"color:violet\">Score : {{score}}/5</h4>\n    <h4 *ngIf=\"!outputResult\" style=\"color:red\">\n      <h4>Your Output: </h4>{{err}}</h4>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -713,6 +716,7 @@ var EditorComponent = (function () {
         this.router = router;
         this.queService = queService;
         this._loginService = _loginService;
+        this.options = { maxLines: 1000, printMargin: false };
         this.showScore = false;
         this.score = 0;
         this.wrong = 0;
@@ -726,22 +730,26 @@ var EditorComponent = (function () {
     }
     EditorComponent.prototype.ngOnInit = function () {
     };
+    EditorComponent.prototype.onChange = function (code) {
+        console.log('new code', code);
+    };
     EditorComponent.prototype.download = function () {
         // console.log('calling');
         var doc = new __WEBPACK_IMPORTED_MODULE_4_jspdf__();
         doc.text(20, 20, this.code);
         doc.save('code.pdf');
     };
-    EditorComponent.prototype.compile = function () {
+    EditorComponent.prototype.runSampleTestCases = function () {
         var _this = this;
         this.showScore = false;
         this.input = this.queService.getInput();
         this.output = this.queService.getOutput();
+        console.log(this.input);
         if (this.code !== '' && this.lang !== '') {
             var code = {
                 code: this.code,
                 lang: parseInt(this.lang, 10),
-                input: this.input
+                input: this.input[0]
             };
             this._loginService.compile(code)
                 .subscribe(function (res) {
@@ -850,6 +858,10 @@ var EditorComponent = (function () {
     };
     return EditorComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewChild"])('editor'),
+    __metadata("design:type", Object)
+], EditorComponent.prototype, "editor", void 0);
 EditorComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
         selector: 'app-editor',

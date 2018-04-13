@@ -1,4 +1,4 @@
-webpackJsonp(["dashboard.module.0"],{
+webpackJsonp(["dashboard.module"],{
 
 /***/ "../../../../../src/app/dashboard/dashboard-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -131,6 +131,7 @@ var DashboardComponent = (function () {
             section: this.authService.studentSection
         };
         this.quizService.getAnsweredQuizWeeks(query).subscribe(function (res) {
+            // console.log("answered ", res);
             _this.quizAnsweredWeeks = res;
         });
         this.studentDetails['name'] = this.authService.username;
@@ -155,7 +156,7 @@ var DashboardComponent = (function () {
         this._loginService.getAnsweredQuestions(query)
             .subscribe(function (res) {
             _this.answeredQuestions = res;
-            // console.log(this.answeredQuestions);
+            console.log('answered ', _this.answeredQuestions);
             _this.getTotalQuestions();
         });
     };
@@ -347,4 +348,4 @@ DashboardModule = __decorate([
 /***/ })
 
 });
-//# sourceMappingURL=dashboard.module.0.chunk.js.map
+//# sourceMappingURL=dashboard.module.chunk.js.map

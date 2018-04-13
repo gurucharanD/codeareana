@@ -1,4 +1,4 @@
-webpackJsonp(["register.module.0"],{
+webpackJsonp(["register.module"],{
 
 /***/ "../../../../../src/app/register-user/register-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -189,4 +189,4 @@ RegisterModule = __decorate([
 /***/ })
 
 });
-//# sourceMappingURL=register.module.0.chunk.js.map
+//# sourceMappingURL=register.module.chunk.js.map

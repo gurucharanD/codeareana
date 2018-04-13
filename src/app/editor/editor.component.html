@@ -1,22 +1,30 @@
 <div id="editor">
-    <div class="col-sm-6" id="questionPart" style="display:block;height:100%px;overflow:scroll;">
+    <div class="col-sm-6" id="questionPart" style="display:block;min-height:500px;overflow:scroll;">
       <h1>{{question.name}}</h1>
       <p>{{question.question}}</p>
     </div>
     <div class="editorPart">
-    <div class="col-sm-6" id="editor">
-      <textarea style="overflow:scroll;font-size:100%;" rows="30" cols="86" id="code" placeholder="Enter your code here" [(ngModel)]="code" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">
-      </textarea>
+    <div class="col-sm-6">
+      <div ace-editor
+      #editor
+      [(text)]="code" 
+      [mode]="'javascript'" 
+      [options]="options"
+      [readOnly]="false"
+      [autoUpdateContent]="true"
+      [durationBeforeCallback]="1000"
+      (textChanged)="onChange($event)"
+      style="min-height: 500px; width:100%; font-size:120%; overflow: scroll;"></div>
 
       <div style="margin:4%;padding:2%;box-shadow:1px 1px 2px">
         <label for="language">language</label>
         <select name="lang" id="lang" [(ngModel)]="lang">
           <option value="1">PYTHON</option>
-          <!-- <option value="2">JAVA</option>
-          <option value="3">C</option> -->
+          <option value="2">JAVA</option>
+          <!-- <option value="3">C</option> --> 
         </select>
         <br>
-        <input style="margin:2%;" type="submit" value="Run Sample Test Case" (click)="compile()" class="btn btn-primary">
+        <input style="margin:2%;" type="submit" value="Run Sample Test Case" (click)="runSampleTestCases()" class="btn btn-primary">
         <input type="submit" style="margin:2%;" value="Run All Test Cases" class="btn btn-danger" (click)="run()">
         <br>
         <button (click)="download()" style="margin:2%;" class="btn btn-warning">Download Code</button>

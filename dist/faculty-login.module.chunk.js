@@ -1,4 +1,4 @@
-webpackJsonp(["faculty-login.module.0"],{
+webpackJsonp(["faculty-login.module"],{
 
 /***/ "../../../../../src/app/faculty-login/faculty-login-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -206,4 +206,4 @@ FacultyLoginModule = __decorate([
 /***/ })
 
 });
-//# sourceMappingURL=faculty-login.module.0.chunk.js.map
+//# sourceMappingURL=faculty-login.module.chunk.js.map

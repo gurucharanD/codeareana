@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
     };
 
     this.quizService.getAnsweredQuizWeeks(query).subscribe(res => {
+      // console.log("answered ", res);
       this.quizAnsweredWeeks = res;
     });
 
@@ -96,7 +97,7 @@ export class DashboardComponent implements OnInit {
     this._loginService.getAnsweredQuestions(query)
       .subscribe(res => {
         this.answeredQuestions = res;
-        // console.log(this.answeredQuestions);
+        console.log('answered ', this.answeredQuestions);
         this.getTotalQuestions();
       });
   }

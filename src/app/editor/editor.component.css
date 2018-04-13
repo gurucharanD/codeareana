@@ -16,7 +16,9 @@ textarea{
 #questionPart {
 
     border: 1px solid black;
-    margin: 2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    margin-right: 2%;
     box-shadow: 2px 1px 1px;
     width: 40%;
     float: left;

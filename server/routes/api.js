@@ -10,7 +10,8 @@ var compile_run = require('compile-run');
 const fs = require('fs');
 const path = require('path');
 
-const directory = 'code/python';
+const pythonDirectory = 'code/python';
+const javaDirectory = 'code/java';
 
 
 
@@ -268,77 +269,92 @@ router.post('/facRegister', function (req, res) {
 router.post('/compile', function (req, res) {
   var code = req.body.code;
   var lang = req.body.lang;
-  var input = req.body.input;
-  var inp = input[0];
-
-  compile_run.runPython(code, inp, function (stdout, stderr, err) {
+  var inp = req.body.input;
+  console.log(inp);
+switch(lang){
+  case 1:compile_run.runPython(code, inp, function (stdout, stderr, err) {
     if (!err) {
-      fs.readdir(directory, (err, files) => {
-        if (err) {
-          console.log("error files" + err);
-        } else {
-
-          for (const file of files) {
-            fs.unlink(path.join(directory, file), err => {
-              if (err) {
-                console.log(err);
-              }
-            });
-          }
-        }
-      });
+      removeCompiledFiles(pythonDirectory);
       if (stderr)
         res.json(stderr);
       else
         res.json(stdout);
     } else {
-      console.log(err);
+      // console.log(err);
       res.json(err);
     }
   });
+  break;
+  case 2: compile_run.runJava(code, inp, function (stdout, stderr, err) {
+    if (!err) {
+      removeCompiledFiles(javaDirectory);
+      if (stderr)
+        res.json(stderr);
+      else
+        res.json(stdout);
+    } else {
+      // console.log(err);
+      res.json(err);
+    }
+  });
+  break;
+}
 });
 
 
 
+function removeCompiledFiles(dir){
+  fs.readdir(dir, (err, files) => {
+    if (err) {
+      console.log("error files" + err);
+    } else {
+
+      for (const file of files) {
+        fs.unlink(path.join(dir, file), err => {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
+    }
+  });
+}
 
 
 router.post('/run', function (req, res) {
 
+  console.log("calling run");
 
   var code = req.body.code;
   var lang = req.body.lang;
   var input = req.body.input;
   var result = [];
+  console.log(lang);
   switch (lang) {
     case 1:
-
-      calculate(code, input)
+    //python code 
+      calculatePython(code, input)
         .then(result => {
-          fs.readdir(directory, (err, files) => {
-            if (err) {
-              console.log("error files" + err);
-            } else {
-
-              for (const file of files) {
-                fs.unlink(path.join(directory, file), err => {
-                  if (err) {
-                    console.log(err);
-                  }
-                });
-              }
-            }
-          });
+         removeCompiledFiles(pythonDirectory);
           console.log(result);
           res.json(result);
         })
-        .catch(err => console.log("Error : " + err))
-
+        .catch(err => console.log("Error : " + err));
+        break;
+      case 2:
+        calculateJava(code,input)
+        .then(result => {
+          removeCompiledFiles(javaDirectory);
+           console.log(result);
+           res.json(result);
+         })
+         .catch(err => console.log("Error : " + err));
+         break;  
 
   }
-
 });
 
-function calculate(code, input) {
+function calculatePython(code, input) {
   var promiseArray = input.map(inp => {
     return new Promise((resolve, reject) => {
       compile_run.runPython(code, inp, function (stdout, stderr, err) {
@@ -357,6 +373,27 @@ function calculate(code, input) {
   return Promise.all(promiseArray)
 }
 
+
+
+function calculateJava(code, input) {
+  console.log("111111111111111",input);
+  var promiseArray = input.map(inp => {
+    return new Promise((resolve, reject) => {
+      compile_run.runJava(code, inp, function (stdout, stderr, err) {
+        if (!err) {
+          if (stderr)
+            resolve(stderr);
+          else
+            resolve(stdout);
+        } else {
+
+          reject(err)
+        }
+      })
+    })
+  })
+  return Promise.all(promiseArray)
+}
 
 
 
