@@ -9,6 +9,7 @@ const Quiz = require('../models/Quiz');
 var compile_run = require('compile-run');
 const fs = require('fs');
 const path = require('path');
+var rimraf = require('rimraf');
 
 const pythonDirectory = 'code/python';
 const javaDirectory = 'code/java';
@@ -304,22 +305,9 @@ switch(lang){
 
 
 function removeCompiledFiles(dir){
-  fs.readdir(dir, (err, files) => {
-    if (err) {
-      console.log("error files" + err);
-    } else {
-
-      for (const file of files) {
-        fs.unlink(path.join(dir, file), err => {
-          if (err) {
-            console.log(err);
-          }
-        });
-      }
-    }
-  });
+  rimraf(dir, function () { console.log('removing files done'); });
 }
-
+removeCompiledFiles(pythonDirectory);
 
 router.post('/run', function (req, res) {
 
