@@ -206,7 +206,7 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.showQuiz = function () {
         var _this = this;
-        this.displayStudentInfo = false;
+        // this.displayStudentInfo = false;
         if (this.noQuestions) {
             this.noQuestions = false;
         }
@@ -215,6 +215,7 @@ var DashboardComponent = (function () {
         this.userSelectedWeek = this.form.get('week').value;
         this.quizDisplay = false;
         var result = this.isWeekAnswered(this.userSelectedWeek);
+        // console.log(result);
         if (!result) {
             var data = {
                 week: this.form.get('week').value,
@@ -223,18 +224,20 @@ var DashboardComponent = (function () {
             };
             // console.log(data);
             this.quiz.getQuizQuestions(data).subscribe(function (res) {
-                // console.log(res);
+                // console.log("===============", res);
                 if (res.length === 0) {
                     _this.quizDisplay = false;
                     _this.noQuiz = true;
                 }
-                _this.marksDisplay = false;
-                _this.quizQuestions = res;
-                for (var _i = 0, res_1 = res; _i < res_1.length; _i++) {
-                    var iterator = res_1[_i];
-                    _this.fac_answers.push(iterator.answer);
+                else {
+                    _this.marksDisplay = false;
+                    _this.quizQuestions = res;
+                    for (var _i = 0, res_1 = res; _i < res_1.length; _i++) {
+                        var iterator = res_1[_i];
+                        _this.fac_answers.push(iterator.answer);
+                        _this.quizDisplay = true;
+                    }
                 }
-                _this.quizDisplay = true;
             });
         }
         else {

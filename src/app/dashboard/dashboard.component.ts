@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
   }
 
   showQuiz() {
-    this.displayStudentInfo = false;
+    // this.displayStudentInfo = false;
     if (this.noQuestions) {
       this.noQuestions = false;
     }
@@ -151,8 +151,8 @@ export class DashboardComponent implements OnInit {
     this.userSelectedWeek = this.form.get('week').value;
     this.quizDisplay = false;
     const result = this.isWeekAnswered(this.userSelectedWeek);
+    // console.log(result);
     if (!result) {
-
       const data = {
         week: this.form.get('week').value,
         year: this.authService.getUserYear(),
@@ -161,18 +161,19 @@ export class DashboardComponent implements OnInit {
       // console.log(data);
 
       this.quiz.getQuizQuestions(data).subscribe(res => {
-        // console.log(res);
+        // console.log("===============", res);
         if (res.length === 0) {
           this.quizDisplay = false;
           this.noQuiz = true;
+        } else {
+          this.marksDisplay = false;
+          this.quizQuestions = res;
+          for (const iterator of res) {
+            this.fac_answers.push(iterator.answer);
+            this.quizDisplay = true;
+          }
         }
-        this.marksDisplay = false;
-        this.quizQuestions = res;
-        for (const iterator of res) {
-          this.fac_answers.push(iterator.answer);
-        }
-        this.quizDisplay = true;
-      });
+        });
     } else {
       alert('Quiz for the selected week is already attempted');
     }
