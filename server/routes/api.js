@@ -789,20 +789,31 @@ router.post('/generateCode', (req, res) => {
     length: 5,
     numbers: true
   });
-  newCode.code  = random_code;
+  newCode.code = random_code;
   newCode.createdAt = new Date();
-  newCode.save((err,code) => {
-    if(err){
+  newCode.save((err, code) => {
+    if (err) {
       throw err;
-    }
-    else
-    {
+    } else {
       res.json(code);
     }
   });
 })
 
-
+router.post('/checkCodeValidity', (req, res) => {
+  RandomCode.find({
+    year: req.body.year,
+    section: req.body.section,
+    code:req.body.code
+  }, (err,record) => {
+    if(err){
+      throw err;
+    }
+    else{
+      res.json(record);
+    }
+  });
+})
 
 
 

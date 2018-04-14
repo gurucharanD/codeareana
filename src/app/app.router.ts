@@ -52,7 +52,7 @@ export const router: Routes = [{
 },
 {
   path: 'editor',
-  // canActivate: [AuthGuard],
+  canActivate: [AuthGuard],
   component: EditorComponent
 },
 {

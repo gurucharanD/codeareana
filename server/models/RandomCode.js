@@ -9,5 +9,5 @@ const RandomCodeSchema= new Schema({
     section:String,
     createdAt:Date
 });
-RandomCodeSchema.index({"createdAt": 1},{expireAfterSeconds: 1});
+RandomCodeSchema.index({"createdAt": 1},{expireAfterSeconds: 60});
 module.exports  =  mongoose.model('randomCode',RandomCodeSchema,'randomCode');

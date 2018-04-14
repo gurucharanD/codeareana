@@ -1,3 +1,16 @@
+<div>
+  <h5>Select Year : </h5>
+  <select name="selectedYear" [(ngModel)]="selectedYear">
+    <option *ngFor="let i of years">{{i}}</option>
+
+  </select>        
+</div>
+<div>
+  <h5>Select Section : </h5>
+  <select name="selectedSection" [(ngModel)]="selectedSection">
+    <option *ngFor="let i of sections">{{i}}</option>
+  </select>
+</div>
 
 <button mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="generateCode()">
   Generate Code

@@ -23,10 +23,12 @@ export class LoginComponent implements OnInit {
 
   public username = new FormControl('', Validators.required);
   public password = new FormControl('', Validators.required);
+  public code = new FormControl('', Validators.required);
 
   isLoggedIn = false;
   year: number;
- showRefresh = false;
+  showRefresh = false;
+
   constructor(private router: Router, private loginService: LoginService, private fb: FormBuilder, private auth: AuthenticationService) {
 
   }
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.form = this.fb.group({
       'username': this.username,
       'password': this.password,
-      'year': this.year
+      'code': this.code
     });
 
 
@@ -53,22 +55,33 @@ export class LoginComponent implements OnInit {
         username: this.username.value,
         password: this.password.value,
       };
-      this.showRefresh  = true;
+      this.showRefresh = true;
       this.loginService.isValidUser(user)
         .subscribe(res => {
           // console.log(res);
           if (res.result === 1) {
             this.isLoggedIn = true;
-            this.auth.setStudentLogin(true);
             const userDetails = res.userDetails;
-            this.auth.setUserName(userDetails.username);
-            this.auth.setUserYear(userDetails.year);
-            this.auth.setSection(userDetails.section);
-            this.router.navigate(['dashboard']);
+            const obj = {
+              year: userDetails.year,
+              section: userDetails.section,
+              code: this.code.value
+            };
+            this.loginService.checkCodeValidity(obj).subscribe(result => {
+              if (result.length === 0) {
+                alert('Invalid Login Code');
+              } else {
+                this.auth.setStudentLogin(true);
+                this.auth.setUserName(userDetails.username);
+                this.auth.setUserYear(userDetails.year);
+                this.auth.setSection(userDetails.section);
+                this.router.navigate(['dashboard']);
+              }
+            });
           } else {
             this.isLoggedIn = false;
             alert('Invalid USERNAME/PASSWORD/YEAR!');
-            this.showRefresh  = false;
+            this.showRefresh = false;
           }
         });
     }

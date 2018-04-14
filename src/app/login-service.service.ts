@@ -51,6 +51,13 @@ export class LoginService {
 
   }
 
+  checkCodeValidity(data) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/checkCodeValidity', data, { headers: headers })
+      .map(res => res.json());
+  }
+
 
   run(code) {
     const headers = new Headers();

@@ -6,15 +6,15 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module"
+		"dashboard.module.0"
 	],
 	"./faculty-login/faculty-login.module": [
 		"../../../../../src/app/faculty-login/faculty-login.module.ts",
-		"faculty-login.module"
+		"faculty-login.module.0"
 	],
 	"./register-user/register.module": [
 		"../../../../../src/app/register-user/register.module.ts",
-		"register.module"
+		"register.module.0"
 	]
 };
 function webpackAsyncContext(req) {
@@ -411,7 +411,7 @@ var router = [{
     },
     {
         path: 'editor',
-        // canActivate: [AuthGuard],
+        canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_guard__["a" /* AuthGuard */]],
         component: __WEBPACK_IMPORTED_MODULE_4__editor_editor_component__["a" /* EditorComponent */]
     },
     {
@@ -614,7 +614,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/code-generator/code-generator.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"generateCode()\">\n  Generate Code\n</button>\n\n<h1 style=\"margin: 1\">{{code}}</h1>"
+module.exports = "<div>\n  <h5>Select Year : </h5>\n  <select name=\"selectedYear\" [(ngModel)]=\"selectedYear\">\n    <option *ngFor=\"let i of years\">{{i}}</option>\n\n  </select>        \n</div>\n<div>\n  <h5>Select Section : </h5>\n  <select name=\"selectedSection\" [(ngModel)]=\"selectedSection\">\n    <option *ngFor=\"let i of sections\">{{i}}</option>\n  </select>\n</div>\n\n<button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"generateCode()\">\n  Generate Code\n</button>\n\n<h1 style=\"margin: 1\">{{code}}</h1>"
 
 /***/ }),
 
@@ -642,16 +642,34 @@ var CodeGeneratorComponent = (function () {
     function CodeGeneratorComponent(loginService, auth) {
         this.loginService = loginService;
         this.auth = auth;
+        this.years = [];
+        this.sections = [];
+        this.facDetails = [];
     }
     CodeGeneratorComponent.prototype.ngOnInit = function () {
+        var set1 = new Set();
+        var set2 = new Set();
+        this.facDetails = this.auth.getFacultyDetails();
+        for (var i = 0; i < this.facDetails.length; i++) {
+            set1.add(this.facDetails[i]['year']);
+            set2.add(this.facDetails[i]['section']);
+        }
+        var itr1 = set1.values();
+        for (var i = 0; i < set1.size; i++) {
+            this.years.push(itr1.next().value);
+        }
+        var itr2 = set2.values();
+        for (var i = 0; i < set2.size; i++) {
+            this.sections.push(itr2.next().value);
+        }
     };
     CodeGeneratorComponent.prototype.generateCode = function () {
         var _this = this;
         var obj = this.auth.getFacultyDetails();
         // console.log(obj);
         var data = {
-            year: obj[0].year,
-            section: obj[0].section
+            year: this.selectedYear,
+            section: this.selectedSection
         };
         // console.log(data);
         this.loginService.generateRandomLoginCode(data).subscribe(function (res) {
@@ -1356,6 +1374,12 @@ var LoginService = (function () {
         return this.http.post('api/generateCode', data, { headers: headers })
             .map(function (res) { return res.json(); });
     };
+    LoginService.prototype.checkCodeValidity = function (data) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('api/checkCodeValidity', data, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
     LoginService.prototype.run = function (code) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
@@ -1439,7 +1463,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" id =\"loginPage\" style=\"background-image:url('../../assets/login_background.gif');background-size:cover; height: 100vh;\nwidth: 100vw;\" >\n  <div class=\"col-sm-2\"></div>\n<div id=\"loginForm\" class=\"col-sm-4\">\n    <mdl-card  mdl-shadow=\"8\">\n        <mdl-card-title mdl-card-expand>\n     <h4>\n        Student Login\n        </h4>\n        </mdl-card-title>\n        <mdl-card-actions mdl-card-border>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <form class=\"form-horizontal\" [formGroup]=\"form\">\n                  <mdl-textfield\n                  type=\"text\"\n                  formControlName=\"username\"\n                  label=\"Username\"\n                  placeholder=\"Enter Username\"\n                  autofocus></mdl-textfield>\n                  <mdl-layout-spacer></mdl-layout-spacer>\n                    <mdl-textfield\n                  type=\"password\"\n                  formControlName=\"password\"\n                  label=\"Password\"\n                  placeholder=\"Enter Password\"\n                  autofocus></mdl-textfield>\n              <mdl-layout-spacer></mdl-layout-spacer>\n                  <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"checkLogin()\">\n                      Login\n                    </button> \n                    &nbsp; &nbsp;\n                    <mdl-spinner [active]=\"showRefresh\"></mdl-spinner>              \n            </form>\n        </mdl-card-actions>\n      </mdl-card>\n</div>\n</div>"
+module.exports = "<div class=\"row\" id=\"loginPage\" style=\"background-image:url('../../assets/login_background.gif');background-size:cover; height: 100vh;\nwidth: 100vw;\">\n  <div class=\"col-sm-2\"></div>\n  <div id=\"loginForm\" class=\"col-sm-4\">\n    <mdl-card mdl-shadow=\"8\">\n      <mdl-card-title mdl-card-expand>\n        <h4>\n          Student Login\n        </h4>\n      </mdl-card-title>\n      <mdl-card-actions mdl-card-border>\n        <mdl-layout-spacer></mdl-layout-spacer>\n        <form class=\"form-horizontal\" [formGroup]=\"form\">\n          <mdl-textfield type=\"text\" formControlName=\"username\" label=\"Username\" autofocus  placeholder=\"Enter Username\" autofocus></mdl-textfield>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <mdl-textfield type=\"password\" formControlName=\"password\" label=\"Password\" placeholder=\"Enter Password\" autofocus></mdl-textfield>\n          <mdl-textfield type=\"text\"  formControlName=\"code\" placeholder=\"Enter Login Code\"></mdl-textfield>\n          <mdl-layout-spacer></mdl-layout-spacer>\n          <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"checkLogin()\">\n            Login\n          </button>\n          &nbsp; &nbsp;\n          <mdl-spinner [active]=\"showRefresh\"></mdl-spinner>\n        </form>\n      </mdl-card-actions>\n    </mdl-card>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1475,6 +1499,7 @@ var LoginComponent = (function () {
         this.auth = auth;
         this.username = new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required);
         this.password = new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required);
+        this.code = new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required);
         this.isLoggedIn = false;
         this.showRefresh = false;
     }
@@ -1482,7 +1507,7 @@ var LoginComponent = (function () {
         this.form = this.fb.group({
             'username': this.username,
             'password': this.password,
-            'year': this.year
+            'code': this.code
         });
     };
     LoginComponent.prototype.checkLogin = function () {
@@ -1502,12 +1527,24 @@ var LoginComponent = (function () {
                 // console.log(res);
                 if (res.result === 1) {
                     _this.isLoggedIn = true;
-                    _this.auth.setStudentLogin(true);
-                    var userDetails = res.userDetails;
-                    _this.auth.setUserName(userDetails.username);
-                    _this.auth.setUserYear(userDetails.year);
-                    _this.auth.setSection(userDetails.section);
-                    _this.router.navigate(['dashboard']);
+                    var userDetails_1 = res.userDetails;
+                    var obj = {
+                        year: userDetails_1.year,
+                        section: userDetails_1.section,
+                        code: _this.code.value
+                    };
+                    _this.loginService.checkCodeValidity(obj).subscribe(function (result) {
+                        if (result.length === 0) {
+                            alert('Invalid Login Code');
+                        }
+                        else {
+                            _this.auth.setStudentLogin(true);
+                            _this.auth.setUserName(userDetails_1.username);
+                            _this.auth.setUserYear(userDetails_1.year);
+                            _this.auth.setSection(userDetails_1.section);
+                            _this.router.navigate(['dashboard']);
+                        }
+                    });
                 }
                 else {
                     _this.isLoggedIn = false;
