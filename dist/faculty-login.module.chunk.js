@@ -102,8 +102,9 @@ var FacultyLoginComponent = (function () {
         this.isLoggedIn = false;
     }
     FacultyLoginComponent.prototype.ngOnInit = function () {
-        if (__WEBPACK_IMPORTED_MODULE_3_ng2_cookies_ng2_cookies__["Cookie"].get("isLoggedIn") == "1")
+        if (__WEBPACK_IMPORTED_MODULE_3_ng2_cookies_ng2_cookies__["Cookie"].get('isLoggedIn') === '1') {
             this.router.navigate(['postQuestion']);
+        }
         this.form = this.fb.group({
             'username': this.username,
             'password': this.password,
@@ -112,8 +113,8 @@ var FacultyLoginComponent = (function () {
     FacultyLoginComponent.prototype.checkLogin = function () {
         // validate the user here
         var _this = this;
-        if (this.username.value == '' || this.password.value == '') {
-            alert("Username/Password cannot be empty");
+        if (this.username.value === '' || this.password.value === '') {
+            alert('Username/Password cannot be empty');
         }
         else {
             var user = {
@@ -124,10 +125,10 @@ var FacultyLoginComponent = (function () {
             this.loginService.facultyLogin(user)
                 .subscribe(function (res) {
                 console.log(res);
-                if (res.result == 1) {
+                if (res.result === 1) {
                     _this.isLoggedIn = true;
                     __WEBPACK_IMPORTED_MODULE_3_ng2_cookies_ng2_cookies__["Cookie"].set('username', _this.username.value);
-                    __WEBPACK_IMPORTED_MODULE_3_ng2_cookies_ng2_cookies__["Cookie"].set('isFacultyLoggedIn', "1");
+                    __WEBPACK_IMPORTED_MODULE_3_ng2_cookies_ng2_cookies__["Cookie"].set('isFacultyLoggedIn', '1');
                     _this.auth.setUserName(res.value.username);
                     _this.auth.setStudentLogin(true);
                     _this.auth.setFacultyDetails(res.value.map);
@@ -136,7 +137,7 @@ var FacultyLoginComponent = (function () {
                 }
                 else {
                     _this.isLoggedIn = false;
-                    alert("invalid user");
+                    alert('invalid user');
                 }
             });
         }

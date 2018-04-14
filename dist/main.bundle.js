@@ -270,12 +270,14 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__ = __webpack_require__("../../../../../src/app/quiz/quiz.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__ = __webpack_require__("../../../../../src/app/fac-register/fac-register.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_ng2_ace_editor__ = __webpack_require__("../../../../ng2-ace-editor/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__code_generator_code_generator_component__ = __webpack_require__("../../../../../src/app/code-generator/code-generator.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -326,6 +328,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_23__mapping_mapping_component__["a" /* MappingComponent */],
             __WEBPACK_IMPORTED_MODULE_26__quiz_quiz_component__["a" /* QuizComponent */],
             __WEBPACK_IMPORTED_MODULE_27__fac_register_fac_register_component__["a" /* FacRegisterComponent */],
+            __WEBPACK_IMPORTED_MODULE_29__code_generator_code_generator_component__["a" /* CodeGeneratorComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_28_ng2_ace_editor__["a" /* AceEditorModule */],
@@ -587,6 +590,87 @@ AuthenticationService = __decorate([
 ], AuthenticationService);
 
 //# sourceMappingURL=authentication.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/code-generator/code-generator.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/code-generator/code-generator.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"generateCode()\">\n  Generate Code\n</button>\n<br><br>\n<h1>{{code}}</h1>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/code-generator/code-generator.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CodeGeneratorComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__login_service_service__ = __webpack_require__("../../../../../src/app/login-service.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authentication_service__ = __webpack_require__("../../../../../src/app/authentication.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CodeGeneratorComponent = (function () {
+    function CodeGeneratorComponent(loginService, auth) {
+        this.loginService = loginService;
+        this.auth = auth;
+    }
+    CodeGeneratorComponent.prototype.ngOnInit = function () {
+    };
+    CodeGeneratorComponent.prototype.generateCode = function () {
+        var _this = this;
+        var obj = this.auth.getFacultyDetails();
+        // console.log(obj);
+        var data = {
+            year: obj[0].year,
+            section: obj[0].section
+        };
+        // console.log(data);
+        this.loginService.generateRandomLoginCode(data).subscribe(function (res) {
+            _this.code = res.code;
+        });
+    };
+    return CodeGeneratorComponent;
+}());
+CodeGeneratorComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        selector: 'app-code-generator',
+        template: __webpack_require__("../../../../../src/app/code-generator/code-generator.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/code-generator/code-generator.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__login_service_service__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__login_service_service__["a" /* LoginService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object])
+], CodeGeneratorComponent);
+
+var _a, _b;
+//# sourceMappingURL=code-generator.component.js.map
 
 /***/ }),
 
@@ -1266,6 +1350,12 @@ var LoginService = (function () {
         return this.http.post('api/getAnsweredQuestions', data, { headers: headers })
             .map(function (res) { return res.json(); });
     };
+    LoginService.prototype.generateRandomLoginCode = function (data) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('api/generateCode', data, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
     LoginService.prototype.run = function (code) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
@@ -1623,7 +1713,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/post-question/post-question.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<br>\n<br>\n<br>\n<div class=\"row\">\n  <div class=\"col-sm-12\">\n    <mdl-card mdl-shadow=\"4\" class=\"card\">\n\n      <div id=\"questionEditor\">\n\n        <mdl-tabs mdl-ripple mdl-tab-active-index=\"0\">\n          <mdl-tab-panel>\n            <mdl-tab-panel-title>\n              <span>Marks</span>\n            </mdl-tab-panel-title>\n            <mdl-tab-panel-content>\n              <app-faculty-menu></app-faculty-menu>\n            </mdl-tab-panel-content>\n          </mdl-tab-panel>\n          <mdl-tab-panel mdl-tab-panel-title=\"Post Question\">\n\n\n\n            <form id=\"menu\">\n              <div class=\"row\">\n                  <h3 style=\"text-shadow:2px 2px 2px;\">Post a Question</h3>\n                <div class=\"container\">\n                    <div>\n                        <h5>Select Year : </h5>\n                        <select name=\"selectedYear\" [(ngModel)]=\"selectedYear\">\n                          <option *ngFor=\"let i of years\">{{i}}</option>\n        \n                        </select>        \n                    </div>\n                    <div>\n                        <h5>Select Section : </h5>\n                        <select name=\"selectedSection\" [(ngModel)]=\"selectedSection\">\n                          <option *ngFor=\"let i of sections\">{{i}}</option>\n                        </select>\n                    </div>\n                    <div>\n                        <h5>Select week</h5>\n                <select name=\"selectedYear\" [(ngModel)]=\"week\">\n                  <option value=\"1\">1</option>\n                  <option value=\"2\">2</option>\n                  <option value=\"3\">3</option>\n                  <option value=\"4\">4</option>\n                  <option value=\"5\">5</option>\n                  <option value=\"6\">6</option>\n                  <option value=\"7\">7</option>\n                  <option value=\"8\">8</option>\n                  <option value=\"9\">9</option>\n                  <option value=\"10\">10</option>\n                  <option value=\"11\">11</option>\n                  <option value=\"12\">12</option>\n                  <option value=\"13\">13</option>\n                  <option value=\"14\">14</option>\n                  <option value=\"15\">15</option>\n                </select>\n                    </  div>\n                </div>\n              </div>\n              <div class=\"row\">\n                <h5>Post your Question Name</h5>\n                <textarea name=\"questionName\" cols=\"90\" rows=\"2\" [(ngModel)]=\"questionName\" placeholder=\"Problem Statement\"></textarea>\n                <h5>Your question must include : 1. Problem 2.Sample Input&Output\n                </h5>\n                <textarea name=\"problem_stmt\" cols=\"90\" rows=\"10\" [(ngModel)]=\"question\" placeholder=\"Problem\"></textarea>\n              </div>\n              <div class=\"row\">\n                <h5>Enter the number of test cases for input :</h5>\n                <input type=\"text\" name=\"noOfTestCases\" [(ngModel)]=\"n\" (change)=\"changeNoOfTestCases($event.target.value)\">\n                <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"testCases()\">\n                    Submit\n                </button>   \n                <div *ngIf=\"showTestInputBox\" class=\"cases\">\n                  <div>\n                  <h5>Enter Input Test Cases :</h5>\n                  <ul>\n                    <li *ngFor=\"let i of arr\">\n                      <input type=\"text\" name=\"testCase\" [(ngModel)]=\"input[i]\" />{{input[i]}}</li>\n                  </ul>\n                  </div>\n                  <div>\n                  <h5>Enter Output Test Cases :</h5>\n                  <ul>\n                    <li *ngFor=\"let i of arr\">\n                      <input type=\"text\" name=\"testCase\" [(ngModel)]=\"output[i]\" />{{output[i]}}</li>\n                  </ul>\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\" *ngIf=\"showTestInputBox\">\n                <div class=\"col-sm-offset-5 col-sm-2\"> \n                  <button class=\"totalSubmit\" mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"submitQuestion()\">\n                      Submit Question\n                  </button>                \n                </div>\n              </div>\n            </form>\n          </mdl-tab-panel>\n          <mdl-tab-panel>\n            <mdl-tab-panel-title>\n              <span>Quiz</span>\n            </mdl-tab-panel-title>\n            <mdl-tab-panel-content>\n              <app-quiz></app-quiz>\n            </mdl-tab-panel-content>\n          </mdl-tab-panel>\n        </mdl-tabs>\n      </div>\n    </mdl-card>\n  </div>\n\n</div>\n"
+module.exports = "<br>\n<br>\n<br>\n<div class=\"row\">\n  <div class=\"col-sm-12\">\n    <mdl-card mdl-shadow=\"4\" class=\"card\">\n\n      <div id=\"questionEditor\">\n\n        <mdl-tabs mdl-ripple mdl-tab-active-index=\"0\">\n          <mdl-tab-panel>\n            <mdl-tab-panel-title>\n              <span>Marks</span>\n            </mdl-tab-panel-title>\n            <mdl-tab-panel-content>\n              <app-faculty-menu></app-faculty-menu>\n            </mdl-tab-panel-content>\n          </mdl-tab-panel>\n          <mdl-tab-panel mdl-tab-panel-title=\"Post Question\">\n\n\n\n            <form id=\"menu\">\n              <div class=\"row\">\n                  <h3 style=\"text-shadow:2px 2px 2px;\">Post a Question</h3>\n                <div class=\"container\">\n                    <div>\n                        <h5>Select Year : </h5>\n                        <select name=\"selectedYear\" [(ngModel)]=\"selectedYear\">\n                          <option *ngFor=\"let i of years\">{{i}}</option>\n        \n                        </select>        \n                    </div>\n                    <div>\n                        <h5>Select Section : </h5>\n                        <select name=\"selectedSection\" [(ngModel)]=\"selectedSection\">\n                          <option *ngFor=\"let i of sections\">{{i}}</option>\n                        </select>\n                    </div>\n                    <div>\n                        <h5>Select week</h5>\n                <select name=\"selectedYear\" [(ngModel)]=\"week\">\n                  <option value=\"1\">1</option>\n                  <option value=\"2\">2</option>\n                  <option value=\"3\">3</option>\n                  <option value=\"4\">4</option>\n                  <option value=\"5\">5</option>\n                  <option value=\"6\">6</option>\n                  <option value=\"7\">7</option>\n                  <option value=\"8\">8</option>\n                  <option value=\"9\">9</option>\n                  <option value=\"10\">10</option>\n                  <option value=\"11\">11</option>\n                  <option value=\"12\">12</option>\n                  <option value=\"13\">13</option>\n                  <option value=\"14\">14</option>\n                  <option value=\"15\">15</option>\n                </select>\n                    </  div>\n                </div>\n              </div>\n              <div class=\"row\">\n                <h5>Post your Question Name</h5>\n                <textarea name=\"questionName\" cols=\"90\" rows=\"2\" [(ngModel)]=\"questionName\" placeholder=\"Problem Statement\"></textarea>\n                <h5>Your question must include : 1. Problem 2.Sample Input&Output\n                </h5>\n                <textarea name=\"problem_stmt\" cols=\"90\" rows=\"10\" [(ngModel)]=\"question\" placeholder=\"Problem\"></textarea>\n              </div>\n              <div class=\"row\">\n                <h5>Enter the number of test cases for input :</h5>\n                <input type=\"text\" name=\"noOfTestCases\" [(ngModel)]=\"n\" (change)=\"changeNoOfTestCases($event.target.value)\">\n                <button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"testCases()\">\n                    Submit\n                </button>   \n                <div *ngIf=\"showTestInputBox\" class=\"cases\">\n                  <div>\n                  <h5>Enter Input Test Cases :</h5>\n                  <ul>\n                    <li *ngFor=\"let i of arr\">\n                      <input type=\"text\" name=\"testCase\" [(ngModel)]=\"input[i]\" />{{input[i]}}</li>\n                  </ul>\n                  </div>\n                  <div>\n                  <h5>Enter Output Test Cases :</h5>\n                  <ul>\n                    <li *ngFor=\"let i of arr\">\n                      <input type=\"text\" name=\"testCase\" [(ngModel)]=\"output[i]\" />{{output[i]}}</li>\n                  </ul>\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\" *ngIf=\"showTestInputBox\">\n                <div class=\"col-sm-offset-5 col-sm-2\"> \n                  <button class=\"totalSubmit\" mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"submitQuestion()\">\n                      Submit Question\n                  </button>                \n                </div>\n              </div>\n            </form>\n          </mdl-tab-panel>\n          <mdl-tab-panel>\n            <mdl-tab-panel-title>\n              <span>Quiz</span>\n            </mdl-tab-panel-title>\n            <mdl-tab-panel-content>\n              <app-quiz></app-quiz>\n            </mdl-tab-panel-content>\n          </mdl-tab-panel>\n          <mdl-tab-panel>\n            <mdl-tab-panel-title>\n              <span>Generate Login Code</span>\n            </mdl-tab-panel-title>\n            <mdl-tab-panel-content>\n              <app-code-generator></app-code-generator>\n            </mdl-tab-panel-content>\n          </mdl-tab-panel>\n        </mdl-tabs>\n      </div>\n    </mdl-card>\n  </div>\n\n</div>\n"
 
 /***/ }),
 

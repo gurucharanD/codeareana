@@ -8,28 +8,28 @@ export class LoginService {
   constructor(private http: Http) { }
 
   isValidUser(user) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/studentLogin', JSON.stringify(user), { headers: headers })
       .map(res => res.json());
   }
 
   facultyLogin(user) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/facultyLogin', JSON.stringify(user), { headers: headers })
       .map(res => res.json());
   }
 
   postQuestion(question) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/postQuestion', JSON.stringify(question), { headers: headers })
       .map(res => res.json());
   }
 
   getQuestions(data) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/getQuestions', JSON.stringify(data), { headers: headers })
       .map(res => res.json());
@@ -37,28 +37,37 @@ export class LoginService {
 
   getAnsweredQuestions(data) {
     // console.log(data);
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/getAnsweredQuestions', data, { headers: headers })
       .map(res => res.json());
   }
 
+  generateRandomLoginCode(data) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/generateCode', data, { headers: headers })
+      .map(res => res.json());
+
+  }
+
+
   run(code) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/run', JSON.stringify(code), { headers: headers })
       .map(res => res.json());
   }
 
   compile(code) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/compile', JSON.stringify(code), { headers: headers })
       .map(res => res.json());
   }
 
   submitMarks(marks) {
-    var headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('api/updateMarks', JSON.stringify(marks), { headers: headers })
       .map(res => res.json());

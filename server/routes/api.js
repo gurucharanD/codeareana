@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('../models/User');
+const RandomCode = require('../models/RandomCode');
 const Faculty = require('../models/Faculty');
 const Admin = require('../models/Admin');
 const Marks = require('../models/Marks');
@@ -10,6 +11,7 @@ var compile_run = require('compile-run');
 const fs = require('fs');
 const path = require('path');
 var rimraf = require('rimraf');
+var generator = require('generate-password');
 
 const pythonDirectory = 'code/python';
 const javaDirectory = 'code/java';
@@ -272,42 +274,45 @@ router.post('/compile', function (req, res) {
   var lang = req.body.lang;
   var inp = req.body.input;
   console.log(inp);
-switch(lang){
-  case 1:compile_run.runPython(code, inp, function (stdout, stderr, err) {
-    if (!err) {
-      removeCompiledFiles(pythonDirectory);
-      if (stderr)
-        res.json(stderr);
-      else
-        res.json(stdout);
-    } else {
-      // console.log(err);
-      res.json(err);
-    }
-  });
-  break;
-  case 2: compile_run.runJava(code, inp, function (stdout, stderr, err) {
-    if (!err) {
-      removeCompiledFiles(javaDirectory);
-      if (stderr)
-        res.json(stderr);
-      else
-        res.json(stdout);
-    } else {
-      // console.log(err);
-      res.json(err);
-    }
-  });
-  break;
-}
+  switch (lang) {
+    case 1:
+      compile_run.runPython(code, inp, function (stdout, stderr, err) {
+        if (!err) {
+          removeCompiledFiles(pythonDirectory);
+          if (stderr)
+            res.json(stderr);
+          else
+            res.json(stdout);
+        } else {
+          // console.log(err);
+          res.json(err);
+        }
+      });
+      break;
+    case 2:
+      compile_run.runJava(code, inp, function (stdout, stderr, err) {
+        if (!err) {
+          removeCompiledFiles(javaDirectory);
+          if (stderr)
+            res.json(stderr);
+          else
+            res.json(stdout);
+        } else {
+          // console.log(err);
+          res.json(err);
+        }
+      });
+      break;
+  }
 });
 
 
 
-function removeCompiledFiles(dir){
-  rimraf(dir, function () { console.log('removing files done'); });
+function removeCompiledFiles(dir) {
+  rimraf(dir, function () {
+    console.log('removing files done');
+  });
 }
-removeCompiledFiles(pythonDirectory);
 
 router.post('/run', function (req, res) {
 
@@ -320,24 +325,24 @@ router.post('/run', function (req, res) {
   console.log(lang);
   switch (lang) {
     case 1:
-    //python code 
+      //python code 
       calculatePython(code, input)
         .then(result => {
-         removeCompiledFiles(pythonDirectory);
+          removeCompiledFiles(pythonDirectory);
           console.log(result);
           res.json(result);
         })
         .catch(err => console.log("Error : " + err));
-        break;
-      case 2:
-        calculateJava(code,input)
+      break;
+    case 2:
+      calculateJava(code, input)
         .then(result => {
           removeCompiledFiles(javaDirectory);
-           console.log(result);
-           res.json(result);
-         })
-         .catch(err => console.log("Error : " + err));
-         break;  
+          console.log(result);
+          res.json(result);
+        })
+        .catch(err => console.log("Error : " + err));
+      break;
 
   }
 });
@@ -364,7 +369,7 @@ function calculatePython(code, input) {
 
 
 function calculateJava(code, input) {
-  console.log("111111111111111",input);
+  // console.log("111111111111111", input);
   var promiseArray = input.map(inp => {
     return new Promise((resolve, reject) => {
       compile_run.runJava(code, inp, function (stdout, stderr, err) {
@@ -402,8 +407,8 @@ router.post('/saveMarks', function (req, res) {
       res.send("ERROR UPDATING Marks");
     else {
       const marksScored = req.body.marks[0].marksScored;
-      console.log("marks scored  -------------",marksScored);
-      updateMarksInUserTable(req.body.username,marksScored);
+      console.log("marks scored  -------------", marksScored);
+      updateMarksInUserTable(req.body.username, marksScored);
       res.json(updatedMarks);
     }
   });
@@ -499,15 +504,15 @@ router.post('/filterMarks', function (req, res) {
   var year = req.body.year;
   var section = req.body.section;
   var marks = req.body.marks;
-  var quizmarks=req.body.quizmarks;
+  var quizmarks = req.body.quizmarks;
   User.find({
       year,
       section,
       marks: {
         $gt: marks
       },
-      quizmarks:{
-        $gt:quizmarks
+      quizmarks: {
+        $gt: quizmarks
       }
     })
     .exec(function (err, records) {
@@ -612,9 +617,8 @@ router.post('/savequizmarks', (req, res) => {
           $inc: {
             quizmarks: quizmarks,
           },
-          $push:
-          {
-            attemptedQuizWeeks:attemptedQuizWeek
+          $push: {
+            attemptedQuizWeeks: attemptedQuizWeek
           }
         }, (err, userdata) => {
           if (err) {
@@ -636,14 +640,14 @@ router.post('/savequizmarks', (req, res) => {
 
 })
 
-router.post('/getAnsweredQuizWeeks',(req,res)=>{
+router.post('/getAnsweredQuizWeeks', (req, res) => {
   User.findOne({
     username: req.body.username,
     year: req.body.year,
     section: req.body.section
-  },(err,data)=>{
+  }, (err, data) => {
     console.log(data);
-    if(err) console.log(err);
+    if (err) console.log(err);
     res.json(data.attemptedQuizWeeks);
   });
 })
@@ -672,7 +676,7 @@ router.post('/adminLogin', function (req, res) {
         result: 0
       });
     } else {
-        console.log("Valid User");
+      console.log("Valid User");
       res.json({
         msg: 'Login successful',
         result: 1,
@@ -777,6 +781,26 @@ router.post('/answerquiz', (req, res) => {
   })
 })
 
+router.post('/generateCode', (req, res) => {
+  let newCode = new RandomCode();
+  newCode.section = req.body.section;
+  newCode.year = req.body.year;
+  let random_code = generator.generate({
+    length: 5,
+    numbers: true
+  });
+  newCode.code  = random_code;
+  newCode.createdAt = new Date();
+  newCode.save((err,code) => {
+    if(err){
+      throw err;
+    }
+    else
+    {
+      res.json(code);
+    }
+  });
+})
 
 
 

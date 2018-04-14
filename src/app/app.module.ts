@@ -92,6 +92,7 @@ import {
 } from './quiz/quiz.component';
 import { FacRegisterComponent } from './fac-register/fac-register.component';
 import { AceEditorModule } from 'ng2-ace-editor';
+import { CodeGeneratorComponent } from './code-generator/code-generator.component';
 
 
 
@@ -110,6 +111,7 @@ import { AceEditorModule } from 'ng2-ace-editor';
     MappingComponent,
     QuizComponent,
     FacRegisterComponent,
+    CodeGeneratorComponent,
 
   ],
   imports: [
