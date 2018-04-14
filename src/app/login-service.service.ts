@@ -60,7 +60,7 @@ export class LoginService {
   submitMarks(marks) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/submit', JSON.stringify(marks), { headers: headers })
+    return this.http.post('api/updateMarks', JSON.stringify(marks), { headers: headers })
       .map(res => res.json());
   }
 

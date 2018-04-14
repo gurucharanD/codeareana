@@ -398,47 +398,25 @@ function calculateJava(code, input) {
 
 
 router.post('/saveMarks', function (req, res) {
-  console.log("saving marks");
+  // console.log("saving marks");
   let studentMarks = new Marks();
   studentMarks.username = req.body.username;
   studentMarks.year = req.body.year;
   studentMarks.section = req.body.section;
   studentMarks.week = req.body.week;
   studentMarks.marks = req.body.marks;
-  console.log(studentMarks);
+  // console.log(studentMarks);
 
   //user already..marks array push..
-  Marks.findOneAndUpdate({
-    username: req.body.username
-  }, {
-    $push: {
-      marks: studentMarks.marks[0]
-    }
-  }, {
-    new: true
-  }, (err, updatedMarks) => {
+  // console.log(req.body.marks);
+  studentMarks.save((err, updatedMarks) => {
     if (err)
       res.send("ERROR UPDATING Marks");
     else {
-      if (updatedMarks == null) {
-        studentMarks.save((err, student) => {
-          if (err)
-            res.send("ERROR UPDATING Marks");
-          else {
-            updateMarksInUserTable(req.body.username, req.body.marks[0].marksScored);
-            return res.json({
-              'msg': 'submitted successfully',
-              'marks': student
-            });
-          }
-        });
-      } else {
-        updateMarksInUserTable(req.body.username, req.body.marks[0].marksScored);
-        return res.json({
-          'msg': 'submitted successfully',
-          'marks': updatedMarks
-        });
-      }
+      const marksScored = req.body.marks[0].marksScored;
+      console.log("marks scored  -------------",marksScored);
+      updateMarksInUserTable(req.body.username,marksScored);
+      res.json(updatedMarks);
     }
   });
 
@@ -486,9 +464,9 @@ let updateMarksInUserTable = (username, marksScored) => {
   });
 }
 
-router.post('/submit', function (req, res) {
+router.post('/updateMarks', function (req, res) {
   console.log("update marks");
-  var username = req.body.userName;
+  var username = req.body.username;
   var marks = req.body.marks;
   Marks.findOneAndUpdate({
       username

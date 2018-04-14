@@ -116,8 +116,6 @@ export class EditorComponent implements OnInit {
 
     this._loginService.getStudentMarks(data)
       .subscribe(res => {
-        // console.log(res);
-        // console.log('scored marks : ', marks.marksScored);
         if (res === undefined || res === null) {
           const updatemarks = {
             username: this.auth.getUserName(),

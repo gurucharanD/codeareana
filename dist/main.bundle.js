@@ -783,8 +783,6 @@ var EditorComponent = (function () {
         };
         this._loginService.getStudentMarks(data)
             .subscribe(function (res) {
-            console.log(res);
-            console.log('scored marks : ', marks.marksScored);
             if (res === undefined || res === null) {
                 var updatemarks = {
                     username: _this.auth.getUserName(),
@@ -1283,7 +1281,7 @@ var LoginService = (function () {
     LoginService.prototype.submitMarks = function (marks) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('api/submit', JSON.stringify(marks), { headers: headers })
+        return this.http.post('api/updateMarks', JSON.stringify(marks), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     LoginService.prototype.getMarks = function (data) {

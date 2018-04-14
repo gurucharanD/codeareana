@@ -63,9 +63,9 @@ export class DashboardComponent implements OnInit {
 
 
     const query = {
-      username: this.authService.username,
-      year: this.authService.studentYear,
-      section: this.authService.studentSection
+      username: this.authService.getUserName(),
+      year: this.authService.getUserYear(),
+      section: this.authService.getUserSection()
     };
 
     this.quizService.getAnsweredQuizWeeks(query).subscribe(res => {
@@ -96,8 +96,8 @@ export class DashboardComponent implements OnInit {
     };
     this._loginService.getAnsweredQuestions(query)
       .subscribe(res => {
-        this.answeredQuestions = res;
-        console.log('answered ', this.answeredQuestions);
+        console.log(res);
+        this.answeredQuestions = res.length > 0 ? res[0].marks : res;
         this.getTotalQuestions();
       });
   }
@@ -120,35 +120,25 @@ export class DashboardComponent implements OnInit {
         this.noQuestions = false;
         Cookie.set('week', this.form.get('week').value + ' ');
         this.showQuestions = true;
-
         if (this.answeredQuestions.length === 0) {
           this.displayQuestions = this.questions;
         } else {
-          // console.log(this.questions);
           this.calculateArray();
         }
       }
     });
   }
   calculateArray() {
-    const aq = this.answeredQuestions[0]['marks'];
-
-    // console.log(aq);
-    // console.log(this.questions);
-
-    let i, j;
-    for (i = 0; i < this.questions.length; i++) {
-      for (j = 0; j < aq.length; j++) {
-        if (aq[j].qid !== this.questions[i]['_id']) {
-          this.displayQuestions.push(this.questions[i]);
-        }
-      }
-
+    const aq = this.answeredQuestions;
+    for (let i = 0; i < aq.length; i++) {
+      this.questions = this.questions.filter(question => question['_id'] !== aq[i].qid);
     }
+    this.displayQuestions = this.questions;
+
     if (this.displayQuestions.length === 0) {
       alert('You have already answered all the questions');
     }
-    // console.log(this.displayQuestions);
+    console.log(this.displayQuestions);
   }
 
   showQuiz() {

@@ -126,9 +126,9 @@ var DashboardComponent = (function () {
             week: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required]
         });
         var query = {
-            username: this.authService.username,
-            year: this.authService.studentYear,
-            section: this.authService.studentSection
+            username: this.authService.getUserName(),
+            year: this.authService.getUserYear(),
+            section: this.authService.getUserSection()
         };
         this.quizService.getAnsweredQuizWeeks(query).subscribe(function (res) {
             // console.log("answered ", res);
@@ -155,8 +155,8 @@ var DashboardComponent = (function () {
         };
         this._loginService.getAnsweredQuestions(query)
             .subscribe(function (res) {
-            _this.answeredQuestions = res;
-            console.log('answered ', _this.answeredQuestions);
+            console.log(res);
+            _this.answeredQuestions = res.length > 0 ? res[0].marks : res;
             _this.getTotalQuestions();
         });
     };
@@ -184,28 +184,25 @@ var DashboardComponent = (function () {
                     _this.displayQuestions = _this.questions;
                 }
                 else {
-                    // console.log(this.questions);
                     _this.calculateArray();
                 }
             }
         });
     };
     DashboardComponent.prototype.calculateArray = function () {
-        var aq = this.answeredQuestions[0]['marks'];
-        // console.log(aq);
-        // console.log(this.questions);
-        var i, j;
-        for (i = 0; i < this.questions.length; i++) {
-            for (j = 0; j < aq.length; j++) {
-                if (aq[j].qid !== this.questions[i]['_id']) {
-                    this.displayQuestions.push(this.questions[i]);
-                }
-            }
+        var aq = this.answeredQuestions;
+        var _loop_1 = function (i) {
+            this_1.questions = this_1.questions.filter(function (question) { return question['_id'] !== aq[i].qid; });
+        };
+        var this_1 = this;
+        for (var i = 0; i < aq.length; i++) {
+            _loop_1(i);
         }
+        this.displayQuestions = this.questions;
         if (this.displayQuestions.length === 0) {
             alert('You have already answered all the questions');
         }
-        // console.log(this.displayQuestions);
+        console.log(this.displayQuestions);
     };
     DashboardComponent.prototype.showQuiz = function () {
         var _this = this;
