@@ -10,6 +10,7 @@ import { AuthenticationService } from '../authentication.service';
 export class CodeGeneratorComponent implements OnInit {
 
   code: String;
+  
 
   constructor(public loginService: LoginService, public auth: AuthenticationService) { }
 

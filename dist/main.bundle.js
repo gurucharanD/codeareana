@@ -614,7 +614,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/code-generator/code-generator.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"generateCode()\">\n  Generate Code\n</button>\n<br><br>\n<h1>{{code}}</h1>"
+module.exports = "\n<button mdl-button mdl-button-type=\"raised\" mdl-colored=\"primary\" mdl-ripple (click)=\"generateCode()\">\n  Generate Code\n</button>\n\n<h1 style=\"margin: 1\">{{code}}</h1>"
 
 /***/ }),
 
