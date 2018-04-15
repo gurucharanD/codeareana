@@ -20,11 +20,7 @@ const javaDirectory = 'code/java';
 
 const router = express.Router();
 
-<<<<<<< HEAD
 const db = "mongodb://codearena:codearena@ds023613.mlab.com:23613/codearena";
-=======
-const db = "mongodb://admin:admin@ds139567.mlab.com:39567/codearena";
->>>>>>> 6a24e9d86c4d7cf5582242702337987743ff4b8a
 
 mongoose.Promise = global.Promise;
 
