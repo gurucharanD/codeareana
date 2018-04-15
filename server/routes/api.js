@@ -509,10 +509,10 @@ router.post('/filterMarks', function (req, res) {
       year,
       section,
       marks: {
-        $eq: marks
+        $gte: marks
       },
       quizmarks: {
-        $eq: quizmarks
+        $gte: quizmarks
       }
     })
     .exec(function (err, records) {
