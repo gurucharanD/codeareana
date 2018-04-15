@@ -20,7 +20,7 @@ const javaDirectory = 'code/java';
 
 const router = express.Router();
 
-const db = "mongodb://localhost:27017";
+const db = "mongodb://admin:admin@ds139567.mlab.com:39567/codearena";
 
 mongoose.Promise = global.Promise;
 

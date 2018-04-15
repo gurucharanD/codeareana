@@ -6,15 +6,15 @@ webpackJsonp(["main"],{
 var map = {
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module.0"
+		"dashboard.module"
 	],
 	"./faculty-login/faculty-login.module": [
 		"../../../../../src/app/faculty-login/faculty-login.module.ts",
-		"faculty-login.module.0"
+		"faculty-login.module"
 	],
 	"./register-user/register.module": [
 		"../../../../../src/app/register-user/register.module.ts",
-		"register.module.0"
+		"register.module"
 	]
 };
 function webpackAsyncContext(req) {
