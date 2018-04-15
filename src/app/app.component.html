@@ -16,7 +16,7 @@
             <li><a *ngIf="!isLoggedIn"  routerLink="/facultyLogin">Faculty Login</a></li>
             <li><a *ngIf="!isLoggedIn"  routerLink="/registerUser">Register Student</a></li>
             <li><a *ngIf="!isLoggedIn"  routerLink="/facultyRegister">Register Faculty</a></li>           
-            <li><a *ngIf="isLoggedIn" >Welcome {{user}}</a></li>
+            <li><a *ngIf="isLoggedIn" >{{welcome}}&nbsp;{{user}}</a></li>
               <li><a *ngIf="isLoggedIn"  (click)="logout()">Log out</a></li>
           </ul>
         </div>
