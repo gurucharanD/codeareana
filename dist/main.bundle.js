@@ -1121,8 +1121,10 @@ module.exports = "<div id=\"FacultyMenu\">\n  <form id=\"menu\">\n    <h1>Downlo
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__authentication_service__ = __webpack_require__("../../../../../src/app/authentication.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_service_service__ = __webpack_require__("../../../../../src/app/login-service.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jspdf_autotable__ = __webpack_require__("../../../../jspdf-autotable/dist/jspdf.plugin.autotable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jspdf_autotable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jspdf_autotable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_file_saver__ = __webpack_require__("../../../../file-saver/FileSaver.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_file_saver__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_xlsx__ = __webpack_require__("../../../../xlsx/xlsx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_xlsx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1139,11 +1141,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
+
 var FacultyMenuComponent = (function () {
     function FacultyMenuComponent(window, auth, _loginService) {
         this.window = window;
         this.auth = auth;
         this._loginService = _loginService;
+        this.EXCEL_TYPE = 'aplication/vnd.openxmlformats-officedocument.spreadheetml.sheet;charset=UTF-8';
         this.viewMarks = false;
         this.marksScored = 0;
         this.facDetails = [];
@@ -1182,13 +1186,28 @@ var FacultyMenuComponent = (function () {
     };
     FacultyMenuComponent.prototype.download = function () {
         var columns = ['UserName', 'Marks'];
-        var rows = [];
+        var report = [];
         for (var i = 0; i < this.students.length; i++) {
-            rows.push([this.students['username']]);
+            var name = this.students[i].username;
+            var marks = this.students[i].marks;
+            report.push({ name: name, marks: marks });
         }
-        var doc = new __WEBPACK_IMPORTED_MODULE_3_jspdf_autotable__();
-        doc.autoTable(columns, rows);
-        doc.save('table.pdf');
+        try {
+            var ws = __WEBPACK_IMPORTED_MODULE_4_xlsx__["utils"].json_to_sheet(report);
+            var wb = __WEBPACK_IMPORTED_MODULE_4_xlsx__["utils"].book_new();
+            __WEBPACK_IMPORTED_MODULE_4_xlsx__["utils"].book_append_sheet(wb, ws, 'data');
+            var excelBuffer = __WEBPACK_IMPORTED_MODULE_4_xlsx__["write"](wb, { bookType: 'xlsx', type: 'buffer' });
+            var data = new Blob([excelBuffer], {
+                type: this.EXCEL_TYPE
+            });
+            __WEBPACK_IMPORTED_MODULE_3_file_saver__["saveAs"](data, new Date().getTime() + '.xlsx');
+        }
+        catch (err) {
+            throw (err);
+        }
+        // const doc = new jsPDF();
+        // doc.autoTable(columns, rows);
+        // doc.save('table.pdf');
         // doc.save('code.pdf');
     };
     FacultyMenuComponent.prototype.getFilteredReports = function () {
@@ -2313,6 +2332,27 @@ Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* pl
 
 module.exports = __webpack_require__("../../../../../src/main.ts");
 
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 

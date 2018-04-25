@@ -13,6 +13,8 @@ import {
   LoginService
 } from '../login-service.service';
 import * as jsPDF from 'jspdf-autotable';
+import * as fileSaver from 'file-saver';
+import * as xlsx from 'xlsx';
 
 @Component({
   selector: 'app-faculty-menu',
@@ -25,6 +27,7 @@ import * as jsPDF from 'jspdf-autotable';
 })
 export class FacultyMenuComponent implements OnInit {
 
+  EXCEL_TYPE='aplication/vnd.openxmlformats-officedocument.spreadheetml.sheet;charset=UTF-8';
   year: number;
   section: string;
   viewMarks = false;
@@ -74,15 +77,31 @@ export class FacultyMenuComponent implements OnInit {
 
   download() {
     const columns = ['UserName', 'Marks'];
-    const rows = [];
+    let report=[];
     for (let i = 0; i < this.students.length; i++) {
-      rows.push([this.students['username']]);
+      let name=this.students[i].username;
+      let marks=this.students[i].marks;
+      report.push({name,marks})
     }
 
-    const doc = new jsPDF();
-    doc.autoTable(columns, rows);
+    try{
+      const ws:xlsx.WorkSheet=xlsx.utils.json_to_sheet(report);
+      const wb:xlsx.WorkBook=xlsx.utils.book_new();
+      xlsx.utils.book_append_sheet(wb,ws,'data');
 
-    doc.save('table.pdf');
+      const excelBuffer:any=xlsx.write(wb,{bookType:'xlsx',type:'buffer'})
+      const data:Blob=new Blob([excelBuffer],{
+        type:this.EXCEL_TYPE
+      });
+      fileSaver.saveAs(data,new Date().getTime()+'.xlsx');
+    }catch(err){
+          throw(err);
+    }
+
+    // const doc = new jsPDF();
+    // doc.autoTable(columns, rows);
+
+    // doc.save('table.pdf');
 
     // doc.save('code.pdf');
   }
